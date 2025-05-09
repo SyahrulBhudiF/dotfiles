@@ -50,7 +50,6 @@ with pkgs; [
 
       # XML & Internasionalisasi
       intl
-      xml
 
       # Security
       openssl

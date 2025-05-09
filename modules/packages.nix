@@ -21,7 +21,40 @@ with pkgs; [
 
   # --- Web Development ---
   # PHP (diperlukan untuk intelephense LSP)
-  php
+  (php.buildEnv {
+    extensions = ({enabled, all}: enabled ++ (with all; [
+      # Database
+      pdo
+      pdo_mysql
+      pdo_pgsql
+      mysqli
+
+      # Cache & Performance
+      redis
+      opcache
+      apcu
+
+      # Essentials
+      mbstring
+      curl
+      dom
+      zip
+
+      # Image Processing
+      gd
+      imagick
+
+      # Data & Math
+      bcmath
+      gmp
+
+      # XML & Internasionalisasi
+      intl
+      xml
+
+      # Security
+      openssl
+    ])))
   php84Packages.composer # PHP dependency manager
   bun           # JavaScript runtime/bundler/package manager
 

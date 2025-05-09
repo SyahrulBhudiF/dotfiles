@@ -54,7 +54,26 @@ with pkgs; [
 
       # Security
       openssl
-    ])))
+    ]));
+
+    extraConfig = ''
+      [PHP]
+      memory_limit = 512M
+      upload_max_filesize = 100M
+      post_max_size = 100M
+      max_execution_time = 300
+
+      [opcache]
+      opcache.enable=1
+      opcache.enable_cli=1
+      opcache.memory_consumption=128
+      opcache.interned_strings_buffer=8
+      opcache.max_accelerated_files=4000
+
+      [redis]
+      redis.session.locking_enabled=1
+    '';
+  })
   php84Packages.composer # PHP dependency manager
   bun           # JavaScript runtime/bundler/package manager
 

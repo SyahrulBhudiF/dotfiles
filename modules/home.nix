@@ -27,6 +27,11 @@
   programs = {
     home-manager.enable = true;
 
+    composer = {
+      enable = true;
+      home = "${config.home.homeDirectory}/.nix-composer";
+    };
+
     zsh = {
       enable = false;
     };

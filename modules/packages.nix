@@ -20,8 +20,7 @@ with pkgs; [
   csvlens       # CSV viewer
 
   # --- Web Development ---
-  # PHP (diperlukan untuk intelephense LSP)
-  (php.buildEnv {
+  (php84.buildEnv {
     extensions = ({enabled, all}: enabled ++ (with all; [
       # Database
       pdo
@@ -73,7 +72,6 @@ with pkgs; [
       redis.session.locking_enabled=1
     '';
   })
-  php84Packages.composer # PHP dependency manager
   bun           # JavaScript runtime/bundler/package manager
 
   # --- Git Tools ---

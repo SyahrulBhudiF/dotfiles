@@ -12,6 +12,10 @@
     packages = import ./packages.nix {
       inherit pkgs flakePkgs;
     };
+
+    sessionVariables = {
+      COMPOSER_HOME = "/home/ryuko/.config/composer";
+    };
   };
 
   fonts.fontconfig = {
@@ -26,11 +30,6 @@
 
   programs = {
     home-manager.enable = true;
-
-    composer = {
-      enable = true;
-      home = "${config.home.homeDirectory}/.nix-composer";
-    };
 
     zsh = {
       enable = false;
@@ -60,5 +59,11 @@
   };
 
   home.file = {
+  };
+
+  home.activation = {
+    setEnvironment = ''
+      export HOME="${config.home.homeDirectory}"
+    '';
   };
 }

@@ -12,6 +12,7 @@ with pkgs; [
   yq            # YAML/JSON/XML processor (like jq)
   eza           # Modern 'ls' replacement
   grpcurl       # gRPC client (like curl)
+  qpdf          # PDF manipulation tool
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system

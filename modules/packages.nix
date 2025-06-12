@@ -39,6 +39,7 @@ with pkgs; [
       curl
       dom
       zip
+      xdebug
 
       # Image Processing
       gd

@@ -35,6 +35,11 @@
       enable = false;
     };
 
+    # direnv = {
+    #   enable = true;
+    #   nix-direnv.enable = true;
+    # };
+
     starship.enable = false;
 
     zoxide.enable = false;

@@ -1,0 +1,191 @@
+/**
+ * @name system24 (tokyo night)
+ * @description a tui-like discord theme. based on tokyo night theme (https://github.com/tokyo-night/tokyo-night-vscode-theme).
+ * @author refact0r
+ * @version 2.0.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/system24
+ * @source https://github.com/refact0r/system24/blob/master/theme/system24-tokyo-night.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+*/
+
+/* import theme modules */
+@import url("https://refact0r.github.io/system24/build/system24.css");
+
+body {
+  /* font, change to '' for default discord font */
+  --font: "DM Mono"; /* change to '' for default discord font */
+  --code-font: "DM Mono"; /* change to '' for default discord font */
+  font-weight: 300; /* text font weight. 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
+  letter-spacing: -0.05ch; /* decreases letter spacing for better readability. recommended on monospace fonts.*/
+
+  /* sizes */
+  --gap: 12px; /* spacing between panels */
+  --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+  --border-thickness: 2px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+  --border-hover-transition: 0.3s ease; /* transition for borders when hovered */
+
+  /* animation/transition options */
+  --animations: on; /* off: disable animations/transitions, on: enable animations/transitions */
+  --list-item-transition: 0.2s ease; /* transition for list items */
+  --dms-icon-svg-transition: 0.4s ease; /* transition for the dms icon */
+
+  /* top bar options */
+  --top-bar-height: var(
+    --gap
+  ); /* height of the top bar (discord default is 36px, old discord style is 24px, var(--gap) recommended if button position is set to titlebar) */
+  --top-bar-button-position: titlebar; /* off: default position, hide: hide buttons completely, serverlist: move inbox button to server list, titlebar: move inbox button to channel titlebar (will hide title) */
+  --top-bar-title-position: off; /* off: default centered position, hide: hide title completely, left: left align title (like old discord) */
+  --subtle-top-bar-title: off; /* off: default, on: hide the icon and use subtle text color (like old discord) */
+
+  /* window controls */
+  --custom-window-controls: off; /* off: default window controls, on: custom window controls */
+  --window-control-size: 14px; /* size of custom window controls */
+
+  /* dms button options */
+  --custom-dms-icon: off; /* off: use default discord icon, hide: remove icon entirely, custom: use custom icon */
+  --dms-icon-svg-url: url(""); /* icon svg url. MUST BE A SVG. */
+  --dms-icon-svg-size: 90%; /* size of the svg (css mask-size property) */
+  --dms-icon-color-before: var(--icon-secondary); /* normal icon color */
+  --dms-icon-color-after: var(
+    --white
+  ); /* icon color when button is hovered/selected */
+  --custom-dms-background: off; /* off to disable, image to use a background image (must set url variable below), color to use a custom color/gradient */
+  --dms-background-image-url: url(""); /* url of the background image */
+  --dms-background-image-size: cover; /* size of the background image (css background-size property) */
+  --dms-background-color: linear-gradient(
+    70deg,
+    var(--blue-2),
+    var(--purple-2),
+    var(--red-2)
+  ); /* fixed color/gradient (css background property) */
+
+  /* background image options */
+  --background-image: on; /* off: no background image, on: enable background image (must set url variable below) */
+  --background-image-url: url("https://i.imgur.com/sCyLpe9.png"); /* url of the background image */
+
+  /* transparency/blur options */
+  /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
+  --transparency-tweaks: on; /* off: no changes, on: remove some elements for better transparency */
+  --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+  --panel-blur: off; /* off: no changes, on: blur the background of panels */
+  --blur-amount: 2px; /* amount of blur */
+  --bg-floating: var(
+    --bg-3
+  ); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+
+  /* other options */
+  --small-user-panel: on; /* off: default user panel, on: smaller user panel like in old discord */
+
+  /* unrounding options */
+  --unrounding: off; /* off: default, on: remove rounded corners from panels */
+
+  /* styling options */
+  --custom-spotify-bar: on; /* off: default, on: custom text-like spotify progress bar */
+  --ascii-titles: on; /* off: default, on: use ascii font for titles at the start of a channel */
+  --ascii-loader: system24; /* off: default, system24: use system24 ascii loader, cats: use cats loader */
+
+  /* panel labels */
+  --panel-labels: on; /* off: default, on: add labels to panels */
+  --label-color: var(--text-muted); /* color of labels */
+  --label-font-weight: 500; /* font weight of labels */
+}
+
+/* color options */
+:root {
+  --colors: on;
+
+  /* Text Colors - Purple Depth Optimization */
+  --text-0: #3a2a5f; /* Royal velvet base */
+  --text-1: #f5ebff; /* Soft moonlight lavender */
+  --text-2: #d8c7ff; /* Velvet twilight */
+  --text-3: #c5b2f7; /* Mystic heather */
+  --text-4: #9e8bd9; /* Dusky orchid */
+  --text-5: #7565b3; /* Twilight amethyst */
+
+  /* Background Colors - Deep Purple Matrix */
+  --bg-1: #2e2347; /* Cosmic plum */
+  --bg-2: #281e3d; /* Midnight nebula */
+  --bg-3: #211836; /* Void orchid */
+  --bg-4: rgba(26, 18, 47, 0.85); /* Abyss purple */
+  --hover: rgba(160, 140, 220, 0.12);
+  --active: rgba(170, 150, 230, 0.25);
+  --active-2: rgba(180, 160, 240, 0.35);
+  --message-hover: rgba(200, 180, 255, 0.08);
+
+  /* Accent Colors - Balanced Purple Spectrum */
+  --accent-1: #e6d1ff; /* Moonlit lavender */
+  --accent-2: #d2b8ff; /* Digital violet */
+  --accent-3: #be9eff; /* Cyber lilac */
+  --accent-4: #aa85fc; /* Neon amethyst */
+  --accent-5: #966de9; /* Electric grape */
+  --accent-new: #ffb8f5; /* Holographic orchid */
+
+  /* Gradients - Purple Fusion */
+  --mention: linear-gradient(
+    to right,
+    color-mix(in hsl, var(--accent-3), transparent 90%) 30%,
+    transparent
+  );
+  --mention-hover: linear-gradient(
+    to right,
+    color-mix(in hsl, var(--accent-2), transparent 95%) 30%,
+    transparent
+  );
+  --reply: linear-gradient(
+    to right,
+    color-mix(in hsl, #d4c1ff, transparent 90%) 30%,
+    transparent
+  );
+  --reply-hover: linear-gradient(
+    to right,
+    color-mix(in hsl, #c7b3ff, transparent 95%) 30%,
+    transparent
+  );
+
+  /* Status Colors - Purple Tinted */
+  --online: #b8e6ff; /* Frosty azure */
+  --dnd: #ffb8d4; /* Berry blast */
+  --idle: #ffe6b8; /* Amber glow */
+  --streaming: #c7b8ff; /* Misty lavender */
+  --offline: #8a7db3; /* Dusk violet */
+
+  /* Borders - Subtle Purple Lines */
+  --border-light: rgba(200, 185, 230, 0.15);
+  --border: rgba(190, 175, 220, 0.25);
+  --border-hover: #c7b3ff;
+  --button-border: rgba(55, 45, 90, 0.3);
+
+  /* Enhanced Base Colors */
+  --red-1: #ffd1f0; /* Blush pink */
+  --red-2: #ffb8e6; /* Cotton candy */
+  --red-3: #ff9edc; /* Fairy floss */
+  --red-4: #ff85d2; /* Bubblegum */
+  --red-5: #ff6bc8; /* Neon pink */
+
+  --green-1: #d1ffe8; /* Mint frost */
+  --green-2: #b8ffde; /* Aqua spring */
+  --green-3: #9effd4; /* Jade mist */
+  --green-4: #85ffca; /* Emerald glow */
+  --green-5: #6bffc0; /* Cyber mint */
+
+  --blue-1: #d8e7ff; /* Sky whisper */
+  --blue-2: #c2d8ff; /* Denim haze */
+  --blue-3: #acc9ff; /* Twilight blue */
+  --blue-4: #96baff; /* Electric sky */
+  --blue-5: #80abff; /* Neon azure */
+
+  --yellow-1: #fff5d8; /* Vanilla cream */
+  --yellow-2: #ffefc2; /* Lemon chiffon */
+  --yellow-3: #ffe9ac; /* Sunbeam */
+  --yellow-4: #ffe396; /* Golden haze */
+  --yellow-5: #ffdd80; /* Solar flare */
+
+  /* Ultimate Purple Scale */
+  --purple-1: #e8d8ff; /* Cosmic mist */
+  --purple-2: #d4c2ff; /* Nebula shimmer */
+  --purple-3: #c0acff; /* Digital twilight */
+  --purple-4: #ac96ff; /* Cyber orchid */
+  --purple-5: #9880ff; /* Retro wave */
+}

@@ -25,11 +25,6 @@
       url = "github:usagi-flow/evil-helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, ghostty, ... }:
@@ -39,7 +34,6 @@
       flakePkgs = {
         bash-env-json = bash-env-json.packages.${system}.default;
         evil-helix = evil-helix.packages.${system}.default;
-        ghostty = ghostty.packages.${system}.default;
       };
 
     in {

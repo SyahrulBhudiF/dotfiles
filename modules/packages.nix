@@ -86,6 +86,12 @@ with pkgs; [
   rustc         # Rust compiler
   cargo         # Rust package manager/build tool
 
+  # --- Shell ---
+  nushell      # Modern shell
+
+  # --- Editor ---
+  flakePkgs.evil-helix
+
   # --- Font ---
   monaspace     # Monospace font family from GitHub
   inter         # Sans-serif font (sudah ada sebelumnya)

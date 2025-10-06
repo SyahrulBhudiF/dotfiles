@@ -20,14 +20,20 @@
       url = "github:tesujimath/bash-env-json/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    evil-helix = {
+      url = "github:usagi-flow/evil-helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, ... }:
     let
       system = "x86_64-linux";
 
       flakePkgs = {
         bash-env-json = bash-env-json.packages.${system}.default;
+        evil-helix = evil-helix.packages.${system}.default;
       };
 
     in {

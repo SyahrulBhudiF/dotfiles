@@ -88,6 +88,7 @@ with pkgs; [
 
   # --- Shell ---
   nushell      # Modern shell
+  ghostty      # Terminal sharing tool
 
   # --- Editor ---
   flakePkgs.evil-helix

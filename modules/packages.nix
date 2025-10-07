@@ -87,7 +87,7 @@ with pkgs; [
   cargo         # Rust package manager/build tool
 
   # --- Shell ---
-  #nushell      # Modern shell
+  nushell      # Modern shell
 
   # --- Editor ---
   flakePkgs.evil-helix

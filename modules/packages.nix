@@ -86,6 +86,12 @@ with pkgs; [
   rustc         # Rust compiler
   cargo         # Rust package manager/build tool
 
+  # --- Java ---
+  jdk
+
+  # --- Swift ---
+  swift
+  
   # --- Shell ---
   nushell      # Modern shell
 

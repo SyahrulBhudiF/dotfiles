@@ -1,24 +1,54 @@
 #!/usr/bin/env bash
 
+declare -a SPECIAL_NAMES=(
+    ""
+    "music"
+    "communication"
+    "sysmon"
+    "todo"
+    "files"
+)
+
 GROUP=""
 if [ "$1" = "-g" ]; then
     GROUP=1
     shift
 fi
 
+if [ "$1" = "togglespecialworkspace" ]; then
+    if [ -z "$2" ]; then
+        hyprctl dispatch togglespecialworkspace
+        exit 0
+    fi
+
+    special_name=""
+
+    if [[ "$2" =~ ^[0-9]+$ ]] && [ "$2" -lt "${#SPECIAL_NAMES[@]}" ]; then
+        special_name="${SPECIAL_NAMES[$2]}"
+    else
+        special_name="$2"
+    fi
+
+    hyprctl dispatch togglespecialworkspace "$special_name"
+    exit 0
+fi
+
 if [ "$#" -ne 2 ]; then
-    echo "Wrong number of arguments. Usage: $0 [-g] <dispatcher> <workspace>"
+    echo "Usage: $0 [-g] <dispatcher> <workspace_id> OR $0 togglespecialworkspace [id|name]"
+    exit 1
+fi
+
+if ! [[ "$2" =~ ^[0-9]+$ ]]; then
+    echo "Error: <workspace> argument must be a number for dispatcher '$1'."
     exit 1
 fi
 
 ACTIVE_WS=$(hyprctl activeworkspace -j | jq -r '.id')
 
 if [ -n "$GROUP" ]; then
-    # Move to group
     TARGET=$(( ($2 - 1) * 10 + ACTIVE_WS % 10 ))
     hyprctl dispatch "$1" "$TARGET"
 else
-    # Move to ws in group
     TARGET=$(( (($ACTIVE_WS - 1) / 10) * 10 + $2 ))
     hyprctl dispatch "$1" "$TARGET"
 fi

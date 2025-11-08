@@ -27,7 +27,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix,... }:
     let
       system = "x86_64-linux";
 

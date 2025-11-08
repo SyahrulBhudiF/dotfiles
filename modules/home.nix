@@ -54,16 +54,13 @@
       };
     };
 
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "tty";
-        vim_keys = true;
-      };
-    };
-  };
-
-  home.file = {
+    # btop = {
+    #   enable = true;
+    #   settings = {
+    #     color_theme = "tty";
+    #     vim_keys = true;
+    #   };
+    # };
   };
 
   home.activation = {

@@ -1,4 +1,4 @@
-theme = synthwave-everything
+#theme = synthwave-everything
 window-theme = ghostty
 
 background-opacity = 0.95
@@ -6,7 +6,7 @@ background-opacity = 0.95
 adw-toolbar-style = flat
 bold-is-bright = true
 
-command = zsh
+command =  1/home/ryuko/.nix-profile/bin/nu
 
 window-padding-x = 2
 window-padding-y = 2

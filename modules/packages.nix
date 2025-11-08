@@ -91,7 +91,7 @@ with pkgs; [
 
   # --- Swift ---
   swift
-  
+
   # --- Shell ---
   nushell      # Modern shell
 

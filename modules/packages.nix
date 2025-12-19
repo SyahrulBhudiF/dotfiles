@@ -13,7 +13,6 @@ with pkgs; [
   eza           # Modern 'ls' replacement
   grpcurl       # gRPC client (like curl)
   qpdf          # PDF manipulation tool
-  dust          # Disk usage analyzer
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system
@@ -88,9 +87,6 @@ with pkgs; [
 
   # --- Java ---
   jdk
-
-  # --- Swift ---
-  swift
 
   # --- Shell ---
   nushell      # Modern shell

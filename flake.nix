@@ -47,6 +47,7 @@
 
           modules = [
             ./modules/home.nix
+            ./modules/git.nix
           ];
         };
       };
@@ -64,4 +65,3 @@
     ];
   };
 }
-

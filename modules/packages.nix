@@ -13,6 +13,7 @@ with pkgs; [
   eza           # Modern 'ls' replacement
   grpcurl       # gRPC client (like curl)
   qpdf          # PDF manipulation tool
+  jujutsu       # Distributed version control system
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system

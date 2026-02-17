@@ -1,5 +1,7 @@
 { lib, pkgs, inputs, flakePkgs, config, ... }:
-
+let
+  link = config.lib.file.mkOutOfStoreSymlink;
+in
 {
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -35,17 +37,6 @@
       enable = false;
     };
 
-    # nh = {
-    #   enable = true;
-    #   clean.enable= true;
-    #   clean.extraArgs = "--keep-since 4d --keep 3";
-    # }
-
-    # direnv = {
-    #   enable = true;
-    #   nix-direnv.enable = true;
-    # };
-
     starship.enable = false;
 
     zoxide.enable = false;
@@ -67,6 +58,14 @@
     #     vim_keys = true;
     #   };
     # };
+    #
+
+    xdg.configFile = {
+      "jjui" = {
+            source = link "${config.home.homeDirectory}/dotfiles/jjui";
+            recursive = true;
+          };
+    };
   };
 
   home.activation = {

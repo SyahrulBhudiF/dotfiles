@@ -1,0 +1,125 @@
+{ pkgs, config, ... }:
+let
+  email = "syahrul4w@gmail.com";
+  name = "ryuko";
+in
+{
+  programs.gh.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui.theme = {
+        lightTheme = true;
+      };
+      git.pagers = [
+        {
+          colorArg = "always";
+          useConfig = true;
+          externalDiffCommand = "difft";
+        }
+      ];
+      git.log.order = "default";
+    };
+  };
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "${name}";
+        email = "${email}";
+      };
+      credential.helper = "cache --timeout 86400";
+      core = {
+        compression = 9;
+        editor = "nvim";
+      };
+      diff.external = "difft";
+      pull.rebase = false;
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      # use this command to generate the file
+      # echo "$(git config --get user.email) namespaces=\"git\" $(cat ~/.ssh/<MY_KEY>.pub)" >> ~/.ssh/allowed_signers
+      gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.ssh/allowed_signers";
+      user.signingkey = "~/.ssh/id_ed25519.pub";
+      alias = {
+        lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
+        c = "commit -S -m";
+        ca = "commit -S --amend";
+      };
+      # Why?
+      # - ghq default is https, this omit -p option for the ssh push
+      # - https://blog.n-z.jp/blog/2013-11-28-git-insteadof.html
+      url = {
+        "git@github.com:" = {
+          pushInsteadOf = [
+            "git://github.com/"
+            "https://github.com/"
+          ];
+        };
+      };
+      # delta = {
+      #   line-numbers = true;
+      #   syntax-theme = "base16";
+      #   side-by-side = false;
+      #   file-modified-label = "modified:";
+      #   light = true;
+      # };
+      difftastic = {
+        background = "light";
+      };
+      init.defaultBranch = "master";
+    };
+  };
+
+  programs.jjui = {
+    enable = true;
+  };
+
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        email = "${email}";
+        name = "${name}";
+      };
+      signing = {
+        behavior = "own";
+        backend = "ssh";
+        key = "~/.ssh/id_ed25519";
+        backends.ssh.allowed-signers = "${config.home.homeDirectory}/.ssh/allowed_signers";
+      };
+      revsets = {
+        log = "::"; # show all commits by default
+      };
+      aliases ={
+        # Bring nearest bookmark up to recent commit
+        tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+        # Retrunk:
+        # `jj rebase -d 'trunk()' is shorthand for `jj rebase -b @ -d 'trunk()'`
+        # What it does:
+        # `-b @` rebases the entire branch that the current @ is on relative to the destination
+        # `-d trunk()` sets the destination. trunk() finds the most recent `main | master | whatever main branch`
+        retrunk = ["rebase" "-b" "@" "-d" "trunk()"];
+        # Logs last 10 revisions
+        lg = ["log" "-r" "all()" "-n" "10"];
+        # Compare current revision with the previous one
+        compare = ["diff" "--from" "@-" "--to" "@" "--git"];
+      };
+      ui = {
+        paginate = "never";
+        conflict-marker-style = "git";
+        default-command = "log";
+        diff-formatter = [
+          "difft"
+          # it's bad, better to disable it since it causes confusion
+          # see: https://github.com/Wilfred/difftastic/issues/275
+          "--syntax-highlight=off"
+          "--color=always"
+          "--display=side-by-side-show-both"
+          "$left"
+          "$right"
+        ];
+      };
+    };
+  };
+}

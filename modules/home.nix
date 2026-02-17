@@ -59,13 +59,13 @@ in
     #   };
     # };
     #
+  };
 
-    xdg.configFile = {
-      "jjui" = {
-            source = link "${config.home.homeDirectory}/dotfiles/jjui";
-            recursive = true;
-          };
-    };
+  xdg.configFile = {
+    "jjui" = {
+          source = link "${config.home.homeDirectory}/dotfiles/jjui";
+          recursive = true;
+        };
   };
 
   home.activation = {

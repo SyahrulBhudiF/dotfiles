@@ -17,7 +17,26 @@ return {
       "yaml-language-server",
       "lua-language-server",
       "json-lsp",
-      "tinymist"
+      "tinymist",
+
+      -- Rust
+      "rust-analyzer",
+      "rustfmt",
+      "codelldb",
+
+      -- Python
+      "ruff-lsp",
+      "black",
+      "isort",
+
+      -- Common extras
+      "bash-language-server",
+      "dockerfile-language-server",
+      "eslint-lsp",
+      "prettier",
+      "stylua",
+      "taplo",
+      "marksman"
     }
   },
 }

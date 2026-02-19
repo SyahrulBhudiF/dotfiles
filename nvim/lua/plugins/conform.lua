@@ -22,10 +22,26 @@ return {
       jsonc = { "biome" },
       python = { "isort", "ruff" },
       php = { "pint" }
-    }
+    },
+    format_on_save = function()
+      if vim.g.conform_format_on_save == false then
+        return
+      end
+      return { timeout_ms = 3000, lsp_format = "fallback" }
+    end,
   },
   config = function(_, opts)
     require("conform").setup(opts)
+
+    if vim.g.conform_format_on_save == nil then
+      vim.g.conform_format_on_save = true
+    end
+
+    vim.api.nvim_create_user_command("FormatToggle", function()
+      vim.g.conform_format_on_save = not vim.g.conform_format_on_save
+      vim.notify("Format on save: " .. (vim.g.conform_format_on_save and "ON" or "OFF"))
+    end, {})
+
     vim.api.nvim_create_user_command("Format", function(args)
       local range = nil
       if args.count ~= -1 then

@@ -1,2 +1,2 @@
-export PATH="~/Packages/flutter/bin:$PATH"
+export PATH="$HOME/Packages/flutter/bin:$PATH"
 . "$HOME/.cargo/env"

@@ -16,7 +16,13 @@ in
     };
 
     sessionVariables = {
-      COMPOSER_HOME = "/home/ryuko/.config/composer";
+      COMPOSER_HOME = "${config.home.homeDirectory}/.config/composer";
+    };
+
+    file = {
+      ".zshrc".source = link "${config.home.homeDirectory}/dotfiles/zsh/.zshrc";
+      ".zshenv".source = link "${config.home.homeDirectory}/dotfiles/zsh/.zshenv";
+      ".profile".source = link "${config.home.homeDirectory}/dotfiles/.profile";
     };
   };
 
@@ -34,12 +40,12 @@ in
     home-manager.enable = true;
 
     zsh = {
-      enable = false;
+      enable = true;
     };
 
-    starship.enable = false;
+    starship.enable = true;
 
-    zoxide.enable = false;
+    zoxide.enable = true;
 
     bat = {
       enable = true;
@@ -50,22 +56,20 @@ in
         pager = "less -RF";
       };
     };
-
-    # btop = {
-    #   enable = true;
-    #   settings = {
-    #     color_theme = "tty";
-    #     vim_keys = true;
-    #   };
-    # };
-    #
   };
 
   xdg.configFile = {
     "jjui" = {
-          source = link "${config.home.homeDirectory}/dotfiles/jjui";
-          recursive = true;
-        };
+      source = link "${config.home.homeDirectory}/dotfiles/jjui";
+      recursive = true;
+    };
+    "ghostty/config".source = link "${config.home.homeDirectory}/dotfiles/ghostty/config";
+    "fastfetch/config.jsonc".source = link "${config.home.homeDirectory}/dotfiles/fastfetch/config.jsonc";
+    "nvim" = {
+      source = link "${config.home.homeDirectory}/dotfiles/nvim";
+      recursive = true;
+    };
+    "nu/config.nu".source = link "${config.home.homeDirectory}/dotfiles/nu/config.nu";
   };
 
   home.activation = {

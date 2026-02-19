@@ -4,47 +4,23 @@ return {
 	lazy = false,
 	keys = {
     -- stylua: ignore start
+		{ "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode", },
 		{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications", },
 		{ "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer", },
 		{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
 		{ "<leader>cR", function() Snacks.rename() end, desc = "Rename File", },
     { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-		{ "<C-p>",      function() Snacks.picker.files() end, desc = "Find Files" },
-		{ "<leader>fg", function() Snacks.picker.grep() end, desc = "Find Text", },
-		{ "<leader>fb", function() Snacks.picker.buffers() end, desc = "Find Text", },
+		{ "<leader>f",      function() Snacks.picker.files() end, desc = "Find Files" },
+		{ "<leader>/",      function() Snacks.picker.grep() end, desc = "Find Text" },
+
     -- lsp related pickers
-		{ "<leader>fls", function() Snacks.picker.lsp_symbols() end, desc = "LSP Document Symbols", },
-		{ "<leader>flr", function() Snacks.picker.lsp_references() end, desc = "LSP References", },
+		{ "<leader>s", function() Snacks.picker.lsp_symbols() end, desc = "LSP Document Symbols", },
 		-- stylua: ignore end
 	},
 	opts = {
 		bigfile = {
 			enabled = true,
 			notify = true,
-		},
-		dashboard = {
-			enabled = true,
-			sections = {
-				{ section = "header" },
-				{ section = "keys", gap = 1, padding = 1 },
-				{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-				{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-				{
-					pane = 2,
-					icon = " ",
-					title = "Git Status",
-					section = "terminal",
-					enabled = function()
-						return Snacks.git.get_root() ~= nil
-					end,
-					cmd = "git status --short --branch --renames",
-					height = 5,
-					padding = 1,
-					ttl = 5 * 60,
-					indent = 3,
-				},
-				{ section = "startup" },
-			},
 		},
 		notifier = {
 			enabled = true,
@@ -78,27 +54,24 @@ return {
 		picker = {
 			ui_select = true,
 			layout = {
-				reverse = true,
+				reverse = false,
 				layout = {
 					box = "horizontal",
 					backdrop = false,
-					width = 0.8,
+					width = 0.9,
 					height = 0.9,
 					border = "none",
 					{
 						box = "vertical",
-						{
-							win = "list",
-							title = " Results ",
-							title_pos = "center",
-							border = "single",
-						},
+            border = "single",
+            title = "{title} {live} {flags}",
 						{
 							win = "input",
 							height = 1,
-							border = "single",
-							title = "{title} {live} {flags}",
-							title_pos = "center",
+							border = "bottom",
+						},
+						{
+							win = "list",
 						},
 					},
 					{
@@ -110,6 +83,30 @@ return {
 					},
 				},
 			},
+		},
+		zen = {
+			win = {
+				enter = true,
+				fixbuf = true,
+				minimal = true,
+				width = 80,
+				height = 0.9,
+				backdrop = { transparent = false, blend = 99 },
+				keys = { q = false },
+				zindex = 40,
+				w = {
+					snacks_main = true,
+				},
+			},
+      on_open = function()
+        vim.wo.signcolumn = "no"
+        vim.wo.foldcolumn = "0"
+        vim.wo.wrap = true
+        vim.wo.linebreak = true
+      end,
+      toggles = {
+        dim = false,
+      }
 		},
 	},
 	init = function()

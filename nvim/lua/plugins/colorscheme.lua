@@ -4,7 +4,7 @@ return {
     name = "rose-pine",
     init = function()
       vim.opt.laststatus = 3 -- Or 3 for global statusline
-      vim.opt.statusline = " %f %m %r %= %y %l:%c   "
+      vim.opt.statusline = "   %f %m %r %= %y %l:%c"
     end,
     config = function()
       require("rose-pine").setup {
@@ -50,10 +50,17 @@ return {
 
           -- snacks
           SnacksPicker = { fg = "subtle", bg = "base" },
+          SnacksPickerPrompt = { fg = "love", bg = "base" },
+
           SnacksPickerListTitle = { fg = "base", bg = "love" },
           SnacksPickerListBorder = { fg = "love", bg = "base" },
+
           SnacksPickerInputTitle = { fg = "base", bg = "pine" },
           SnacksPickerInputBorder = { fg = "pine", bg = "base" },
+
+          FloatTitle = { fg = "base", bg = "pine" },
+          SnacksPickerBorder = { fg = "pine", bg = "base" },
+
           SnacksPickerPreviewTitle = { fg = "base", bg = "iris" },
           SnacksPickerPreviewBorder = { fg = "iris", bg = "base" },
 
@@ -70,7 +77,7 @@ return {
           BlinkCmpMenuSelection = { bg = "love", blend = 10 },
 
           -- snacks
-          SnacksIndent = { fg = "highlight_high", blend = 10 },
+          SnacksIndent = { fg = "overlay", blend = 10 },
         }
       }
       vim.cmd.colorscheme("rose-pine-dawn")

@@ -3,7 +3,7 @@ return {
 	dependencies = {
 		"kevinhwang91/promise-async",
 	},
-	event = "BufRead",
+	event = { "BufRead", "BufNewFile" },
 	keys = {
     -- stylua: ignore start
     { "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },
@@ -29,9 +29,6 @@ return {
 			end
 			return { "lsp", "indent" }
 		end,
-		close_fold_kinds_for_ft = {
-			default = { "imports", "comment" },
-		},
 		fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 			local hlgroup = "NonText"
 			local newVirtText = {}

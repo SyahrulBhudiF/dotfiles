@@ -7,20 +7,14 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$NVM_DIR:$PATH"
+
 
 eval "$(zoxide init zsh)"
 
-export PATH="/home/ryuko/Packages/flutter/bin:$PATH"
+export PATH="$HOME/Packages/flutter/bin:$PATH"
 export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/x86_64/stable/active/export/bin/com.google.Chrome"
 
-. "/home/ryuko/.deno/env"
-# bun completions
-export PATH="$HOME/.bun/bin:$PATH"
-[ -s "/home/ryuko/.bun/_bun" ] && source "/home/ryuko/.bun/_bun"
+. "$HOME/.deno/env"
 
 
 # Php Laravel alias command

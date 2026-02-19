@@ -14,7 +14,7 @@ intelephense_capabilities.textDocument.completion.dynamicRegistration = true
 
 return {
 	"williamboman/mason-lspconfig.nvim",
-	event = { "BufRead" },
+	event = { "WinEnter", "BufRead", "BufNewFile" },
 	dependencies = {
 		"williamboman/mason.nvim",
 		"neovim/nvim-lspconfig",
@@ -30,7 +30,7 @@ return {
 						return
 					end
 
-					require("lspconfig")[server_name].setup({
+					vim.lsp.config[server_name].setup({
 						capabilities = capabilities,
 						on_attach = function()
 							vim.lsp.inlay_hint.enable(false)
@@ -38,21 +38,25 @@ return {
 					})
 				end,
 
+        ["harper_ls"] = function()
+					vim.lsp.config.harper_ls.setup({
+						capabilities = capabilities,
+            filetypes = { "markdown", "typst" }
+					})
+        end,
+
 				["ts_ls"] = function()
-					-- disable ts_ls
+					-- disable ts_ls, we have its own plugin
 				end,
 
 				["intelephense"] = function()
-					require("lspconfig").intelephense.setup({
+					vim.lsp.config.intelephense.setup({
 						capabilities = intelephense_capabilities,
-						init_options = {
-							licenceKey = "EducationalCode",
-						},
 					})
 				end,
 
 				["basedpyright"] = function()
-					require("lspconfig").basedpyright.setup({
+					vim.lsp.config.basedpyright.setup({
 						capabilities = capabilities,
 						on_attach = function()
 							-- disable inlay hints
@@ -73,13 +77,6 @@ return {
 					})
 				end,
 			},
-		})
-
-		-- other manual stuff that comes from nix shell
-		local lsp = require("lspconfig")
-		lsp.ocamlls.setup({
-			cmd = { "ocamllsp", "--stdio" },
-			filetypes = { "ocaml", "ocaml_interface" },
 		})
 	end,
 }

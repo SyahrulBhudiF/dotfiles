@@ -13,6 +13,8 @@ with pkgs; [
   eza           # Modern 'ls' replacement
   grpcurl       # gRPC client (like curl)
   qpdf          # PDF manipulation tool
+  fastfetch     # System info fetcher
+  ghostty       # Terminal emulator
   jujutsu       # Distributed version control system
 
   # --- Document Processing ---
@@ -75,6 +77,7 @@ with pkgs; [
       redis.session.locking_enabled=1
     '';
   })
+  nodejs_latest # Node.js (latest)
   bun           # JavaScript runtime/bundler/package manager
 
   # --- Git Tools ---
@@ -90,9 +93,13 @@ with pkgs; [
   jdk
 
   # --- Shell ---
+  zsh          # Zsh shell
+  starship     # Prompt
+  zoxide       # Smarter cd
   nushell      # Modern shell
 
   # --- Editor ---
+  neovim       # Neovim editor
   flakePkgs.evil-helix
 
   # --- Font ---

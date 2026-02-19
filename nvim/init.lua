@@ -2,27 +2,7 @@ require("config.lazy")
 require("config.options")
 require("config.mappings")
 require("config.lsp")
-
--- set current directory
-vim.cmd([[
-  au VimEnter * cd %:p:h
-
-  " highlight yanked text for 250ms
-  augroup Yank
-    au!
-    au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250, higroup = "Visual" }
-  augroup END
-
-  " Remove trailing whitespace on save
-  let g:strip_whitespace = v:true
-  augroup Whitespace
-    au!
-    au BufWritePre * if g:strip_whitespace | %s/\s\+$//e
-  augroup END
-
-  " automatically go to insert mode on terminal buffer
-  autocmd BufEnter term://* startinsert
-]])
+require("config.autocmds")
 
 -- prevent typo when pressing `wq` or `q`
 vim.cmd([[
@@ -36,16 +16,20 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 vim.g.zig_fmt_autosave = false
 
 vim.diagnostic.config({
+  virtual_lines = false,
   float = {
     border = "single",
     severity_sort = true,
   },
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
       [vim.diagnostic.severity.INFO] = "",
       [vim.diagnostic.severity.HINT] = "",
-		},
-	},
+    },
+  },
 })
+
+
+vim.g.STRIP = true -- to temporarily disable

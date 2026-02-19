@@ -6,7 +6,7 @@ return {
   },
   opts = {
     options = {
-      theme = "auto",
+      theme = "rose-pine",
       icons_enabled = true,
       globalstatus = true,
       component_separators = { left = "", right = "" },

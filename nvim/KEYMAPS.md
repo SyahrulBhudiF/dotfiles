@@ -1,12 +1,11 @@
-# Neovim Keymap Cheat Sheet (Simple & Clear)
+# Neovim Keymap Cheat Sheet
 
-**Catatan penting:**  
-Di config ini, “Leader” = **tombol Space**.  
-Jadi kalau kamu lihat `<Leader>f`, artinya tekan **Space lalu f**.
+**Space = Leader.**  
+Contoh: `Space + f` berarti tekan **Spasi** lalu **f**.
 
 ---
 
-## Navigasi Jendela (pindah antar panel)
+## Navigasi Jendela
 - **Ctrl + h** → ke panel kiri  
 - **Ctrl + l** → ke panel kanan  
 - **Ctrl + j** → ke panel bawah  
@@ -16,44 +15,44 @@ Jadi kalau kamu lihat `<Leader>f`, artinya tekan **Space lalu f**.
 
 ## File & Pencarian
 - **Ctrl + n** → buka/tutup file tree (Neo-tree)  
-- **Space + f** → cari file (file picker)  
-- **Space + /** → cari teks di semua file (grep)  
-- **Space + n** → hilangkan highlight hasil search  
+- **Space + f** → cari file  
+- **Space + /** → cari teks di semua file  
+- **Space + n** → hilangkan highlight search  
 
 ---
 
-## Neo-tree (File Tree) Saat Fokus
+## Neo-tree (saat fokus di file tree)
 - **l** → buka folder / file  
 - **h** → tutup folder  
-- **Y** → copy full path file  
-- **O** → buka file dengan aplikasi sistem  
+- **Y** → copy full path  
+- **O** → buka dengan aplikasi sistem  
 - **P** → toggle preview  
 
 ---
 
-## LSP (Fitur pintar bahasa)
-- **Space + k** → lihat dokumentasi simbol  
-- **Space + a** → code action (quick fix, refactor)  
-- **g d** → lompat ke definisi  
-- **Space + r** → rename simbol  
-- **Space + gr** → list referensi  
-- **Space + l** → jalankan CodeLens  
-- **Space + d** → lihat diagnostic di baris  
-- **] d** → diagnostic berikutnya  
-- **[ d** → diagnostic sebelumnya  
-- **Ctrl + s** (di insert) → signature help  
+## LSP (Fitur Bahasa)
+- **Space + k** → hover docs  
+- **Space + a** → code action  
+- **g d** → go to definition  
+- **Space + r** → rename symbol  
+- **Space + g r** → list references  
+- **Space + l** → run CodeLens  
+- **Space + d** → diagnostics baris  
+- **] d** → diagnostics berikutnya  
+- **[ d** → diagnostics sebelumnya  
+- **Ctrl + s** (mode insert) → signature help  
 
 ---
 
 ## Git (Gitsigns)
-**Penjelasan singkat:**  
-`gs` = group git signs  
-`gsl` = git signs blame line  
-`gsp` = git signs preview hunk  
+**Arti singkat:**  
+`gs` = group GitSigns  
+`gsl` = GitSigns blame line  
+`gsp` = GitSigns preview hunk  
 
-- **Space + g s l** → blame 1 baris (lihat siapa edit)  
+- **Space + g s l** → blame 1 baris  
 - **Space + g s b** → blame seluruh buffer  
-- **Space + g s d** → diff file sekarang  
+- **Space + g s d** → diff file  
 - **Space + g s s** → stage hunk  
 - **Space + g s p** → preview hunk  
 - **Space + g s r** → reset hunk  
@@ -71,10 +70,10 @@ Jadi kalau kamu lihat `<Leader>f`, artinya tekan **Space lalu f**.
 - **Space + b d** → hapus buffer  
 - **Ctrl + /** → toggle terminal  
 - **Space + z** → toggle Zen mode  
-- **Space + u n** → tutup semua notifikasi  
+- **Space + u n** → tutup notifikasi  
 - **Space + c R** → rename file  
 - **Space + g g** → buka lazygit  
-- **Ketik `:FormatToggle`** → nyalakan/matikan format otomatis saat save  
+- **:FormatToggle** → on/off format saat save  
 
 ---
 
@@ -85,12 +84,12 @@ Jadi kalau kamu lihat `<Leader>f`, artinya tekan **Space lalu f**.
 
 ---
 
-## Kecil tapi penting
-- **Q** → disable Ex mode  
-- **q:** → disable command-line history window  
+## Lainnya
+- **Q** → nonaktifkan Ex mode  
+- **q:** → nonaktifkan command-line history window  
 
 ---
 
-## Tips Cepat
-- Tekan **Space + ?** untuk lihat keymap lokal di buffer  
-- Tekan **Space + g s** untuk lihat grup keymap Git
+## Tips
+- **Space + ?** → lihat keymap lokal buffer  
+- **Space + g s** → tampilkan grup keymap Git

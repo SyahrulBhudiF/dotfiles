@@ -21,6 +21,7 @@ return {
   },
   config = function()
     local mason_lsp = require("mason-lspconfig")
+    local lspconfig = require("lspconfig")
     mason_lsp.setup({
       ensure_installed = {},
       automatic_installation = false,
@@ -30,7 +31,7 @@ return {
             return
           end
 
-          vim.lsp.config[server_name].setup({
+          lspconfig[server_name].setup({
             capabilities = capabilities,
             on_attach = function()
               vim.lsp.inlay_hint.enable(false)
@@ -39,7 +40,7 @@ return {
         end,
 
         ["harper_ls"] = function()
-          vim.lsp.config.harper_ls.setup({
+          lspconfig.harper_ls.setup({
             capabilities = capabilities,
             filetypes = { "markdown", "typst" },
           })
@@ -50,13 +51,13 @@ return {
         end,
 
         ["intelephense"] = function()
-          vim.lsp.config.intelephense.setup({
+          lspconfig.intelephense.setup({
             capabilities = intelephense_capabilities,
           })
         end,
 
         ["basedpyright"] = function()
-          vim.lsp.config.basedpyright.setup({
+          lspconfig.basedpyright.setup({
             capabilities = capabilities,
             on_attach = function()
               -- disable inlay hints
@@ -78,7 +79,7 @@ return {
         end,
 
         ["rust_analyzer"] = function()
-          vim.lsp.config.rust_analyzer.setup({
+          lspconfig.rust_analyzer.setup({
             capabilities = capabilities,
             settings = {
               ["rust-analyzer"] = {

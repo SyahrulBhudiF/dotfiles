@@ -5,6 +5,7 @@ in
 {
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.nixGL.overlays.default ];
 
   home = {
     username = "ryuko";

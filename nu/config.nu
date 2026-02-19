@@ -18,6 +18,7 @@
 #     config nu --doc | nu-highlight | less -R
 
 $env.PATH = ($env.PATH
+    | where $it != $"($env.HOME)/.bun/bin"
     | prepend '/usr/local/bin'
     | prepend '/usr/bin'
     | prepend $"($env.HOME)/.config/composer/vendor/bin"
@@ -25,7 +26,6 @@ $env.PATH = ($env.PATH
     | prepend $"($env.HOME)/.nix-profile/bin"
     | prepend $"($env.HOME)/Packages/flutter/bin"
     | prepend $"($env.HOME)/.local/bin"
-
 )
 
 $env.SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket"

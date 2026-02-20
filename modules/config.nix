@@ -1,22 +1,29 @@
 { config, ... }:
 let
   link = config.lib.file.mkOutOfStoreSymlink;
+  dotfiles = "${config.home.homeDirectory}/dotfiles";
 in
 {
   xdg.configFile = {
     "jjui" = {
-      source = link "${config.home.homeDirectory}/dotfiles/jjui";
+      source = link "${dotfiles}/jjui";
       recursive = true;
     };
     "ghostty/config".source =
-      link "${config.home.homeDirectory}/dotfiles/ghostty/config";
+      link "${dotfiles}/ghostty/config";
     "fastfetch/config.jsonc".source =
-      link "${config.home.homeDirectory}/dotfiles/fastfetch/config.jsonc";
+      link "${dotfiles}/fastfetch/config.jsonc";
     "nvim" = {
-      source = link "${config.home.homeDirectory}/dotfiles/nvim";
+      source = link "${dotfiles}/nvim";
       recursive = true;
     };
     "nu/config.nu".source =
-      link "${config.home.homeDirectory}/dotfiles/nu/config.nu";
+      link "${dotfiles}/nu/config.nu";
+    "opencode/opencode.json".source = link "${dotfiles}/agents/opencode/opencode.json";
+    "opencode/AGENTS.md".source = link "${dotfiles}/agents/AGENTS.md";
+    "opencode/skills" = {
+      source = link "${dotfiles}/agents/skills";
+      recursive = true;
+    };
   };
 }

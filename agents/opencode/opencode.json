@@ -1,0 +1,53 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "general": {
+      "disable": true
+    },
+    "explore": {
+      "disable": true
+    },
+    "plan": {
+      "permission": {
+        "edit": {
+          "*": "deny",
+          "*.md": "ask"
+        },
+        "skill": {
+          "*": "deny",
+          "code-review-*": "allow",
+          "brainstorming": "allow",
+          "build-feature": "allow",
+          "*-best-practices": "allow"
+        }
+      }
+    }
+  },
+  "permission": {
+    "*": "deny",
+    "read": "allow",
+    "write": "allow",
+    "bash": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "lsp": "allow",
+    "list": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "edit": "allow",
+    "external_directory": {
+      "*": "ask",
+      "~/Development/personal/*": "allow",
+      "~/Development/work/*": "allow",
+      "~/Repositories/*": "allow",
+      "/tmp/*": "allow"
+    },
+    "question": "allow",
+    "codesearch": "allow",
+    "skill": {
+      "*": "allow",
+      "pdf": "deny",
+      "xlsx": "deny"
+    }
+  }
+}

@@ -17,8 +17,8 @@ in
       source = link "${dotfiles}/nvim";
       recursive = true;
     };
-    "nu/config.nu".source =
-      link "${dotfiles}/nu/config.nu";
+    "nushell/config.nu".source =
+      link "${dotfiles}/nushell/config.nu";
     "opencode/opencode.json".source = link "${dotfiles}/agents/opencode/opencode.json";
     "opencode/AGENTS.md".source = link "${dotfiles}/agents/AGENTS.md";
     "opencode/skills" = {

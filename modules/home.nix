@@ -88,7 +88,7 @@ in
       source = link "${config.home.homeDirectory}/dotfiles/nvim";
       recursive = true;
     };
-    "nu/config.nu".source = link "${config.home.homeDirectory}/dotfiles/nu/config.nu";
+    "nushell/config.nu".source = link "${config.home.homeDirectory}/dotfiles/nu/config.nu";
   };
 
   home.activation = {

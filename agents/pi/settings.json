@@ -4,5 +4,5 @@
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "google-antigravity",
-  "defaultModel": "gemini-3.1-pro"
+  "defaultModel": "claude-opus-4-6-thinking"
 }

@@ -48,6 +48,8 @@
           modules = [
             ./modules/home.nix
             ./modules/git.nix
+            ./modules/config.nix
+            ./modules/terminal.nix
           ];
         };
       };

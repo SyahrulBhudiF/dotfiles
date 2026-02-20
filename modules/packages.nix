@@ -14,9 +14,6 @@ with pkgs; [
   grpcurl       # gRPC client (like curl)
   qpdf          # PDF manipulation tool
   fastfetch     # System info fetcher
-  (pkgs.writeShellScriptBin "ghostty" ''
-    exec ${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${pkgs.ghostty}/bin/ghostty "$@"
-  '') # Terminal emulator (nixGL Mesa wrapper)
   jujutsu       # Distributed version control system
 
   # --- Document Processing ---

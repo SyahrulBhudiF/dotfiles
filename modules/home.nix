@@ -7,6 +7,10 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [ inputs.nixGL.overlays.default ];
 
+  imports = [
+    ./terminal.nix
+  ];
+
   home = {
     username = "ryuko";
     homeDirectory = "/home/ryuko";
@@ -64,7 +68,7 @@ in
       source = link "${config.home.homeDirectory}/dotfiles/jjui";
       recursive = true;
     };
-    "ghostty/config".source = link "${config.home.homeDirectory}/dotfiles/ghostty/config";
+
     "fastfetch/config.jsonc".source = link "${config.home.homeDirectory}/dotfiles/fastfetch/config.jsonc";
     "nvim" = {
       source = link "${config.home.homeDirectory}/dotfiles/nvim";

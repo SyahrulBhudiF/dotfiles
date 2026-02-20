@@ -76,9 +76,6 @@ with pkgs; [
       redis.session.locking_enabled=1
     '';
   })
-  nodejs_latest # Node.js (latest)
-  bun           # JavaScript runtime/bundler/package manager
-
   # --- Git Tools ---
   git-filter-repo # Rewrite Git history (remove secrets, etc.)
   delta         # Advanced git diff viewer

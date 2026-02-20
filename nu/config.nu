@@ -26,10 +26,15 @@ $env.PATH = ($env.PATH
     | prepend $"($env.HOME)/.nix-profile/bin"
     | prepend $"($env.HOME)/Packages/flutter/bin"
     | prepend $"($env.HOME)/.local/bin"
+    | prepend $"($env.HOME)/.bun/bin"
+    | prepend $"($env.HOME)/.moon/bin/"
 )
 
 $env.SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket"
 
 source ~/.zoxide.nu
+
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
 alias hms = nix run nixpkgs#home-manager -- switch --flake .#ryuko

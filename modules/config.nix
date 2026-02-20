@@ -18,7 +18,7 @@ in
       recursive = true;
     };
     "nushell/config.nu".source =
-      link "${dotfiles}/nushell/config.nu";
+      link "${dotfiles}/nu/config.nu";
     "opencode/opencode.json".source = link "${dotfiles}/agents/opencode/opencode.json";
     "opencode/AGENTS.md".source = link "${dotfiles}/agents/AGENTS.md";
     "opencode/skills" = {

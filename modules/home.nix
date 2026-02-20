@@ -78,19 +78,6 @@ in
     };
   };
 
-  xdg.configFile = {
-    "jjui" = {
-      source = link "${config.home.homeDirectory}/dotfiles/jjui";
-      recursive = true;
-    };
-    "fastfetch/config.jsonc".source = link "${config.home.homeDirectory}/dotfiles/fastfetch/config.jsonc";
-    "nvim" = {
-      source = link "${config.home.homeDirectory}/dotfiles/nvim";
-      recursive = true;
-    };
-    "nushell/config.nu".source = link "${config.home.homeDirectory}/dotfiles/nu/config.nu";
-  };
-
   home.activation = {
     setEnvironment = ''
       export HOME="${config.home.homeDirectory}"

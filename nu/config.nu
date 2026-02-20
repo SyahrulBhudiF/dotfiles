@@ -38,3 +38,4 @@ mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
 alias hms = nix run nixpkgs#home-manager -- switch --flake .#ryuko
+alis hmb = nix run nixpkgs#home-manager -- switch --flake .#ryuko -b backup

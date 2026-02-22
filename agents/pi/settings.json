@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.54.0",
-  "defaultThinkingLevel": "off",
+  "lastChangelogVersion": "0.54.1",
+  "defaultThinkingLevel": "standard",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "google-antigravity",
-  "defaultModel": "claude-opus-4-6-thinking"
+  "defaultModel": "gemini-3-pro-high"
 }

@@ -5,6 +5,11 @@
       "command": "bunx",
       "args": ["-y", "opensrc-mcp"]
     },
+    "memory": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
     "exa": {
       "url": "https://mcp.exa.ai/mcp"
     }

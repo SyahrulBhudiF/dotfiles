@@ -64,6 +64,7 @@ return {
 					{
 						box = "vertical",
             border = "single",
+            win = { input = { keys = { ["<Esc>"] = { "close", mode = { "n", "i" } }, ["<c-c>"] = { "close", mode = { "n", "i" } } } } },
             title = "{title} {live} {flags}",
 						{
 							win = "input",

@@ -15,6 +15,7 @@ with pkgs; [
   qpdf          # PDF manipulation tool
   fastfetch     # System info fetcher
   jujutsu       # Distributed version control system
+  mosh          # Mobile shell
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system

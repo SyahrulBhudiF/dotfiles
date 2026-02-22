@@ -157,7 +157,7 @@ function buildPromptLine(
   pi: ExtensionAPI,
 ): string[] {
   const p: string[] = [];
-  p.push(t.bold(t.fg("mdLink", `(󰐀) `)));
+  p.push(t.bold(t.fg("mdHeading", ` ) `)));
 
   const cwd = process.cwd();
   const home = process.env.HOME || "";
@@ -168,8 +168,8 @@ function buildPromptLine(
   if (vcs.info) {
     p.push(" on ");
     if (vcs.info.type === "git") {
-      // git: branch with  symbol, then commit in parens
-      p.push(t.fg("accent", ` ${vcs.info.branch}`));
+      // git: branch with  symbol, then commit in parens
+      p.push(t.fg("accent", ` ${vcs.info.branch}`));
       if (vcs.info.dirty) {
         p.push(t.bold(t.fg("error", "*")));
       }
@@ -178,7 +178,7 @@ function buildPromptLine(
       p.push(")");
     } else {
       // jj: commit (short bold + rest dimmed), then bookmark in parens if exists
-      p.push(t.bold(t.fg("accent", ` ${vcs.info.commit}`)));
+      p.push(t.bold(t.fg("accent", ` ${vcs.info.commit}`)));
       if (vcs.info.commitRest) {
         p.push(t.fg("dim", vcs.info.commitRest));
         if (vcs.info.dirty) {
@@ -194,7 +194,7 @@ function buildPromptLine(
   // model: via model
   if (ctx.model?.id) {
     p.push(" via ");
-    p.push(t.bold(t.fg("syntaxString", ` ${ctx.model.id}`)));
+    p.push(t.bold(t.fg("syntaxString", ` ${ctx.model.id}`)));
   }
 
   // thinking
@@ -231,15 +231,14 @@ function buildPromptLine(
   }
 
   // Always show stats (even if 0)
-  p.push(t.fg("dim", " |"));
+  p.push(t.fg("dim", " · "));
 
   // Token counts: input (with cached reads in dim), output (always fresh)
   p.push(
-    " " +
-      t.fg("syntaxFunction", `󰜷 ${tk(inp)}`) +
+    t.fg("syntaxFunction", `↑ ${tk(inp)}`) +
       (cacheRead > 0 ? t.fg("dim", `/${tk(cacheRead)}`) : "") +
       " " +
-      t.fg("syntaxString", `󰜮 ${tk(out)}`),
+      t.fg("syntaxString", `↓ ${tk(out)}`),
   );
   if (cost > 0) p.push(t.fg("dim", ` $${cost.toFixed(4)}`));
 
@@ -257,7 +256,7 @@ function buildPromptLine(
             : "success"
         : "dim";
     const limitStr = limit > 0 ? tk(limit) : "???";
-    p.push(" " + t.fg(color, `󰍛 ${tk(usage.tokens)}/${limitStr}`));
+    p.push(" · " + t.fg(color, `󰍛 ${tk(usage.tokens)}/${limitStr}`));
   }
 
   return [p.join("")];

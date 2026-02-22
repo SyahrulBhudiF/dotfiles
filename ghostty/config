@@ -3,6 +3,9 @@ window-theme = ghostty
 
 background-opacity = 0.95
 
+gtk-titlebar = false
+gtk-adwaita = false
+
 gtk-toolbar-style = flat
 bold-color = bright
 

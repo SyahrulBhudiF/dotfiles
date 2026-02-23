@@ -7,5 +7,4 @@ fi
 
 # User specific environment and startup programs
 . "$HOME/.cargo/env"
-. "/home/ryuko/.deno/env"
 . "$HOME/.local/bin/env"

@@ -25,5 +25,4 @@ fi
 unset rc
 
 . "$HOME/.cargo/env"
-. "/home/ryuko/.deno/env"
 . "$HOME/.local/bin/env"

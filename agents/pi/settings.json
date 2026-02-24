@@ -1,8 +1,13 @@
 {
-  "lastChangelogVersion": "0.54.1",
-  "defaultThinkingLevel": "standard",
+  "lastChangelogVersion": "0.54.2",
+  "defaultThinkingLevel": "off",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "google-antigravity",
-  "defaultModel": "gemini-3-pro-high"
+  "defaultModel": "gemini-3-flash",
+  "packages": [
+    "npm:pi-design-deck",
+    "npm:pi-mcp-adapter",
+    "npm:pi-hashline-edit"
+  ]
 }

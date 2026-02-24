@@ -6,7 +6,6 @@ with pkgs; [
   ripgrep       # Fast grep alternative
   fd            # Fast find alternative
   rclone        # Cloud storage sync
-  yt-dlp        # YouTube downloader
   yazi          # TUI file manager
   pass          # Password manager (password-store)
   yq            # YAML/JSON/XML processor (like jq)

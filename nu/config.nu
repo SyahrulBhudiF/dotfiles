@@ -43,3 +43,7 @@ alias hmb = nix run nixpkgs#home-manager -- switch --flake .#ryuko -b backup
 
 # Load environment secrets safely
 try { source ~/dotfiles/nu/secrets.nu }
+
+alias kotofetch = ~/dotfiles/nu/kotofetch
+$env.config = ($env.config? | default {} | merge { show_banner: false })
+^~/dotfiles/nu/hello.nu

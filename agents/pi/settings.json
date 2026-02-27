@@ -4,8 +4,11 @@
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",
-  "defaultModel": "gemini-3.1-pro-high",
-  "packages": ["npm:pi-mcp-adapter", "npm:pi-hashline-edit"],
+  "defaultModel": "claude-opus-4-6-thinking",
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:pi-hashline-edit"
+  ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,
   "transport": "auto",

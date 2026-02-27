@@ -12,7 +12,6 @@ with pkgs; [
   eza           # Modern 'ls' replacement
   grpcurl       # gRPC client (like curl)
   qpdf          # PDF manipulation tool
-  fastfetch     # System info fetcher
   jujutsu       # Distributed version control system
   mosh          # Mobile shell
 

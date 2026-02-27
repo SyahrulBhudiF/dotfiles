@@ -4,7 +4,7 @@
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",
-  "defaultModel": "claude-opus-4-6-thinking",
+  "defaultModel": "gemini-3.1-pro-high",
   "packages": [
     "npm:pi-mcp-adapter"
   ]

@@ -31,6 +31,7 @@ in
       "${pi}/AGENTS.md".source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";
       "${pi}/settings.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/settings.json";
       "${pi}/mcp.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/mcp.json";
+      "${pi}/package.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/package.json";
       "${pi}/extensions" = {
         source = link "${config.home.homeDirectory}/dotfiles/agents/pi/extensions";
         recursive = true;

@@ -77,7 +77,7 @@ export interface FilePickerResponse {
   scores: Score[];
 }
 
-const FffResult = koffi.struct("FffResult", {
+const FffResult = koffi.struct("FffResult_fff_picker", {
   success: "bool",
   _pad0: koffi.array("uint8", 7),
   data: "void *",

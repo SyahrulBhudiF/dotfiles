@@ -41,3 +41,5 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 alias hms = nix run nixpkgs#home-manager -- switch --flake .#ryuko
 alias hmb = nix run nixpkgs#home-manager -- switch --flake .#ryuko -b backup
 
+# Load environment secrets safely
+try { source ~/dotfiles/nu/secrets.nu }

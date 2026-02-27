@@ -1,13 +1,11 @@
 {
-  "lastChangelogVersion": "0.54.2",
+  "lastChangelogVersion": "0.55.1",
   "defaultThinkingLevel": "off",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
-  "defaultProvider": "google-antigravity",
-  "defaultModel": "gemini-3-flash",
+  "defaultProvider": "kosyayuk",
+  "defaultModel": "claude-opus-4-6-thinking",
   "packages": [
-    "npm:pi-design-deck",
-    "npm:pi-mcp-adapter",
-    "npm:pi-hashline-edit"
+    "npm:pi-mcp-adapter"
   ]
 }

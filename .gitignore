@@ -1,2 +1,4 @@
 *.lock
 nu/secrets.nu
+.tldr
+.tldrignore

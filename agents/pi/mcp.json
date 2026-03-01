@@ -12,6 +12,11 @@
     },
     "exa": {
       "url": "https://mcp.exa.ai/mcp"
+    },
+    "tldr": {
+      "type": "local",
+      "command": "tldr-mcp",
+      "args": ["--project", "."]
     }
   }
 }

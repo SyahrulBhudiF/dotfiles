@@ -44,6 +44,12 @@ in
         source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
         recursive = true;
       };
+
+      # antigravity (gemini cli) global skills
+      ".gemini/antigravity/skills" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
+        recursive = true;
+      };
     };
   };
 

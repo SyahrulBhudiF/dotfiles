@@ -12,12 +12,12 @@ export default function (pi: ExtensionAPI) {
   const originalItalic = Theme.prototype.italic;
 
   // Override bold to use 'warning' color (usually yellow/orange)
-  Theme.prototype.bold = function (this: Theme, text: string) {
+  Theme.prototype.bold = function(this: Theme, text: string) {
     return originalBold(this.fg("mdHeading", text));
   };
 
   // Override italic to use 'accent' color (usually teal/cyan)
-  Theme.prototype.italic = function (this: Theme, text: string) {
+  Theme.prototype.italic = function(this: Theme, text: string) {
     return originalItalic(this.fg("accent", text));
   };
 

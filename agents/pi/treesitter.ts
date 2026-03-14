@@ -1,8 +1,8 @@
-import { createWriteStream } from "node:fs";
-import fs from "node:fs/promises";
-import https from "node:https";
-import os from "node:os";
 import path from "node:path";
+import fs from "node:fs/promises";
+import { createWriteStream } from "node:fs";
+import os from "node:os";
+import https from "node:https";
 import Parser from "tree-sitter";
 import { createPicker } from "../create-picker";
 import type { PickerContext } from "../types";

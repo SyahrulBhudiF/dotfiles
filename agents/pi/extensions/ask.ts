@@ -261,10 +261,10 @@ async function handleSingleQuestion(
       const k = (s: string) => theme.bold(theme.fg("accent", s));
       const l = (s: string) => theme.fg("dim", s);
       if (editMode) {
-        add(` ${k("enter")}${l(" submit • ")}${k("esc")}${l(" go back")}`);
+        add(` ${k("enter")}${l(" · submit")} · ${k("esc")}${l(" go back")}`);
       } else {
         add(
-          ` ${k("↑↓")}${l(" select • ")}${k("enter")}${l(" submit • ")}${k("esc")}${l(" dismiss")}`,
+          ` ${k("↑↓")}${l(" select")} · ${k("enter")}${l(" submit")} · ${k("esc")}${l(" dismiss")}`,
         );
       }
 
@@ -518,14 +518,14 @@ async function handleMultipleQuestions(
         const isAnswered = states[i].answer !== null;
         const label = q.shortTitle || `${i + 1}`;
         if (isActive) {
-          return theme.fg("accent", theme.bold(`[${label}]`));
+          return theme.fg("accent", theme.bold(label));
         }
         if (isAnswered) {
-          return theme.fg("muted", `[${label}✓]`);
+          return theme.fg("muted", `${label}✓`);
         }
-        return theme.fg("dim", `[${label}]`);
+        return theme.fg("dim", label);
       });
-      add(tabs.join(" "));
+      add(tabs.join(" · "));
 
       // Top border
       add(theme.fg("accent", "─".repeat(width)));
@@ -577,10 +577,10 @@ async function handleMultipleQuestions(
       const k = (s: string) => theme.bold(theme.fg("accent", s));
       const l = (s: string) => theme.fg("dim", s);
       if (state.editMode) {
-        add(` ${k("enter")}${l(" submit • ")}${k("esc")}${l(" go back")}`);
+        add(` ${k("enter")}${l(" · submit")} · ${k("esc")}${l(" go back")}`);
       } else {
         add(
-          ` ${k("↑↓")}${l(" select • ")}${k("tab")}${l(" next question • ")}${k("enter")}${l(" submit • ")}${k("esc")}${l(" dismiss")}`,
+          ` ${k("↑↓")}${l(" select")} · ${k("tab")}${l(" next")} · ${k("enter")}${l(" submit")} · ${k("esc")}${l(" dismiss")}`,
         );
       }
 
@@ -621,7 +621,7 @@ async function handleMultipleQuestions(
 
       // Action buttons
       const goBackLabel = "← Go back to edit";
-      const submitLabel = "Submit answers →";
+      const submitLabel = "✔️Submit answers";
       const goBack =
         reviewOptionIndex === 0
           ? theme.fg("accent", theme.bold(`> ${goBackLabel}`))
@@ -638,7 +638,7 @@ async function handleMultipleQuestions(
       const k = (s: string) => theme.bold(theme.fg("accent", s));
       const l = (s: string) => theme.fg("dim", s);
       add(
-        ` ${k("←→")}${l(" select • ")}${k("enter")}${l(" confirm • ")}${k("esc")}${l(" go back")}`,
+        ` ${k("↑↓")}${l(" select")} · ${k("enter")}${l(" confirm")} · ${k("esc")}${l(" go back")}`,
       );
 
       // Bottom border

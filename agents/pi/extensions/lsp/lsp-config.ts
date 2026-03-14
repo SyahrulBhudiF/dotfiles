@@ -224,14 +224,18 @@ export const LSP_SERVERS: LspServerInfo[] = [
       }
 
       const bin = await which("typescript-language-server");
-      if (!bin) return undefined;
+      const initialization = tsserver ? { tsserver: { path: tsserver } } : undefined;
 
-      return createHandle(
-        bin,
-        ["--stdio"],
-        root,
-        tsserver ? { tsserver: { path: tsserver } } : undefined,
-      );
+      if (bin) {
+        return createHandle(bin, ["--stdio"], root, initialization);
+      }
+
+      // Fallback: run from package manager when binary isn't globally available
+      const bunBin = (await which("bun")) || "bun";
+      const proc = spawn(bunBin, ["x", "typescript-language-server", "--stdio"], {
+        cwd: root,
+      }) as ChildProcessWithoutNullStreams;
+      return { process: proc, initialization };
     },
   },
 

@@ -1,4 +1,18 @@
-import { parse, serialize } from "just-bash";
+import os from "node:os";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+
+const justBash = await import("just-bash").catch(async () => {
+  const fallback = pathToFileURL(
+    path.join(os.homedir(), ".pi", "agent", "node_modules", "just-bash", "dist", "bundle", "index.js"),
+  ).href;
+  return import(fallback);
+});
+
+const { parse, serialize } = justBash as {
+  parse: (command: string) => unknown;
+  serialize: (ast: unknown) => string;
+};
 
 export type AstWordPart = { type: string; value?: string };
 export type AstWord = { type: "Word"; parts: AstWordPart[] };
@@ -35,4 +49,3 @@ export function visitSimpleCommands(ast: BashAst, visitor: (command: AstCommand)
     }
   }
 }
-

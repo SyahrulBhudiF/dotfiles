@@ -1,10 +1,10 @@
 {
-  "lastChangelogVersion": "0.57.0",
+  "lastChangelogVersion": "0.58.1",
   "defaultThinkingLevel": "off",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",
-  "defaultModel": "kiro-claude-sonnet-4-5",
+  "defaultModel": "gpt-5.3-codex",
   "packages": [
     "npm:pi-mcp-adapter",
     "npm:pi-hashline-edit"

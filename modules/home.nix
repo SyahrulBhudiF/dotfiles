@@ -2,6 +2,7 @@
 let
   pi = ".pi/agent";
   link = config.lib.file.mkOutOfStoreSymlink;
+  starshipSettings = builtins.fromTOML (builtins.readFile ../starship/config.toml);
 in
 {
   targets.genericLinux.enable = true;
@@ -65,12 +66,14 @@ in
 
   programs = {
     home-manager.enable = true;
-
     zsh = {
       enable = true;
     };
 
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = starshipSettings;
+    };
 
     zoxide.enable = true;
 

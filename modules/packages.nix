@@ -95,7 +95,7 @@ with pkgs; [
 
   # --- Editor ---
   neovim       # Neovim editor
-  flakePkgs.evil-helix
+  # flakePkgs.evil-helix
 
   # --- Font ---
   monaspace     # Monospace font family from GitHub

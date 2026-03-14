@@ -1,0 +1,35 @@
+format = "$username$directory$git_branch$git_status$all$fill$cmd_duration$line_break$character"
+
+[username]
+show_always = true
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+
+[directory]
+style = "bold red"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+
+[git_branch]
+symbol = " "
+style = "bold cyan"
+format = " on [$symbol$branch]($style)"
+
+[git_status]
+style = "bold red"
+format = "([$all_status$ahead_behind]($style))"
+
+[cmd_duration]
+min_time = 500
+style = "dimmed"
+format = "[$duration]($style)"
+
+[fill]
+symbol = " "
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"

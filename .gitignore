@@ -2,3 +2,6 @@
 nu/secrets.nu
 .tldr
 .tldrignore
+
+node_modules/
+agents/pi/extensions/composed-editor/node_modules/

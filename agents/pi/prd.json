@@ -1,0 +1,212 @@
+{
+  "project": "pi-zed-acp",
+  "version": "0.1.0",
+  "status": "planning",
+  "description": "ACP server wrapper yang mengekspos Pi (pi-coding-agent) sebagai ACP-compatible agent untuk integrasi Zed IDE",
+  "goal": "Memungkinkan pengguna Zed menggunakan Pi sebagai AI coding agent di dalam Zed Agent Panel via Agent Client Protocol (ACP), setara dengan Claude Code atau Gemini CLI",
+
+  "background": {
+    "acp_role": "Zed bertindak sebagai ACP client, Pi bertindak sebagai ACP server. Zed spawn Pi sebagai subprocess dan berkomunikasi via stdio (JSON-RPC).",
+    "existing_assets": {
+      "kosyayuk_provider": "Provider OpenAI-compatible ke ai.naufal.work — dipakai Pi sebagai LLM backend",
+      "pi_settings": "settings.json menggunakan github-copilot + claude-opus-4.6 sebagai default",
+      "pi_extensions": "Ada ask.ts, bash-guard.ts, lsp/, notify.ts, dll — extensi runtime Pi yang sudah berjalan"
+    },
+    "acp_wire_protocol": {
+      "transport": "stdio JSON-RPC (bukan HTTP)",
+      "version": "v1",
+      "zed_sends": [
+        "initialize — handshake, kirim client capabilities",
+        "new_session — buat session baru di agent",
+        "prompt — kirim pesan user, mulai agent run",
+        "cancel — batalkan prompt yang sedang berjalan",
+        "authenticate — flow auth jika diperlukan"
+      ],
+      "pi_sends": [
+        "session/notification — stream tool calls, text delta, selesai",
+        "request_permission — minta izin user untuk tool call",
+        "read_text_file — baca file dari project Zed",
+        "write_text_file — tulis file ke project Zed"
+      ]
+    }
+  },
+
+  "architecture": {
+    "pattern": "ACP Server via stdio transport",
+    "runtime": "bun",
+    "language": "TypeScript",
+    "diagram": [
+      "Zed (ACP Client)",
+      "  ↕ stdio JSON-RPC",
+      "zed-acp-server.ts  ← entry point baru",
+      "  ↕ Pi internal API",
+      "Pi Core (@mariozechner/pi-coding-agent)",
+      "  ↕ provider",
+      "kosyayuk-provider / github-copilot",
+      "  ↕ HTTPS",
+      "LLM Backend (ai.naufal.work / Anthropic)"
+    ],
+    "session_lifecycle": [
+      "1. Zed spawn: bun run zed-acp-server.ts --cwd <project>",
+      "2. initialize handshake → Pi respond dgn capabilities",
+      "3. new_session → Pi buat agent instance, simpan di session map",
+      "4. prompt → Pi agent run, stream ACP session_notification ke Zed",
+      "5. Jika Pi butuh baca/tulis file → callback ke Zed via ACP",
+      "6. cancel → abort agent run, respond PromptResponse(Cancelled)",
+      "7. Process exit → Zed deteksi, cleanup otomatis"
+    ]
+  },
+
+  "components": [
+    {
+      "name": "zed-acp-server.ts",
+      "type": "acp-server-entry-point",
+      "path": "agents/pi/extensions/zed-acp-server.ts",
+      "description": "Main ACP server process. Implement AgentSideConnection dari @agentclientprotocol/sdk. Jembatan antara ACP wire protocol dengan Pi internal API.",
+      "responsibilities": [
+        "Handle ACP initialize — deklarasikan capabilities Pi ke Zed",
+        "Handle new_session — buat Pi agent instance per session",
+        "Handle prompt — jalankan Pi agent, convert output ke ACP SessionUpdate stream",
+        "Handle cancel — abort Pi agent run secara graceful",
+        "Handle read_text_file / write_text_file — delegate ke Zed via ACP client callbacks",
+        "Manage session map (sessionId → Pi agent instance)",
+        "Pipe stderr Pi ke stderr process (Zed baca untuk debug log)"
+      ],
+      "key_classes": [
+        "PiAcpServer — implements AgentSideConnection",
+        "PiSession — wrapper Pi agent instance per session",
+        "PiOutputAdapter — konversi Pi stream output ke ACP SessionUpdate"
+      ]
+    },
+    {
+      "name": "zed-acp-provider.ts",
+      "type": "pi-extension",
+      "path": "agents/pi/extensions/zed-acp-provider.ts",
+      "description": "Pi extension yang dikonfigurasi khusus untuk mode headless saat berjalan di dalam Zed. Disable TUI interaktif, override file I/O.",
+      "responsibilities": [
+        "Detect apakah Pi berjalan dalam mode ACP (env var: PI_ZED_ACP=1)",
+        "Disable TUI prompt — jangan tampilkan spinner atau input interaktif",
+        "Override file operations — route read/write ke ACP client callbacks dari zed-acp-server",
+        "Register kosyayuk provider sebagai LLM backend",
+        "Set agent profile yang sesuai untuk context Zed"
+      ]
+    }
+  ],
+
+  "dependencies": {
+    "new_to_install": [
+      {
+        "package": "@agentclientprotocol/sdk",
+        "reason": "TypeScript SDK resmi untuk ACP AgentSideConnection",
+        "install": "bun add @agentclientprotocol/sdk"
+      }
+    ],
+    "existing_peer_deps": [
+      "@mariozechner/pi-coding-agent",
+      "@mariozechner/pi-ai",
+      "@mariozechner/pi-tui"
+    ],
+    "runtime": "bun >= 1.0"
+  },
+
+  "acp_capabilities_declaration": {
+    "protocol_version": "v1",
+    "agent_info": {
+      "name": "pi"
+    },
+    "agent_capabilities": {
+      "load_session": false,
+      "resume_session": false,
+      "session_capabilities": {
+        "list": null
+      },
+      "prompt_capabilities": {
+        "image": false,
+        "audio": false,
+        "embedded_context": true
+      }
+    },
+    "auth_methods": [],
+    "models": {
+      "source": "dinamis dari provider yang terdaftar di Pi",
+      "expose_to_zed": true
+    }
+  },
+
+  "zed_settings_integration": {
+    "file": "~/.config/zed/settings.json",
+    "key": "agent_servers",
+    "example": {
+      "agent_servers": {
+        "pi": {
+          "command": "/home/ryuko/.bun/bin/bun",
+          "args": [
+            "run",
+            "/home/ryuko/dotfiles/agents/pi/extensions/zed-acp-server.ts"
+          ],
+          "env": {
+            "PI_ZED_ACP": "1",
+            "PI_CONFIG_DIR": "/home/ryuko/dotfiles/agents/pi",
+            "ANTHROPIC_AUTH_TOKEN": "${ANTHROPIC_AUTH_TOKEN}",
+            "ANTHROPIC_BASE_URL": "${ANTHROPIC_BASE_URL}"
+          }
+        }
+      }
+    }
+  },
+
+  "files_to_create": [
+    {
+      "path": "agents/pi/extensions/zed-acp-server.ts",
+      "description": "Entry point ACP server. File utama yang di-spawn Zed."
+    },
+    {
+      "path": "agents/pi/extensions/zed-acp-provider.ts",
+      "description": "Pi extension untuk headless/Zed mode."
+    }
+  ],
+
+  "files_to_update": [
+    {
+      "path": "agents/pi/package.json",
+      "change": "Tambah @agentclientprotocol/sdk ke dependencies"
+    }
+  ],
+
+  "risks": [
+    {
+      "id": "R1",
+      "issue": "Pi TUI mengasumsikan terminal interaktif (stdin/stdout untuk UI)",
+      "impact": "Tinggi — ACP juga pakai stdio, bentrok",
+      "mitigation": "Detect mode ACP via env var PI_ZED_ACP=1, skip TUI init, gunakan headless mode Pi jika tersedia"
+    },
+    {
+      "id": "R2",
+      "issue": "Pi streaming output format belum tentu mapping 1:1 ke ACP SessionUpdate",
+      "impact": "Sedang — perlu adapter layer",
+      "mitigation": "Tulis PiOutputAdapter yang konversi Pi events ke ACP TextDelta, ToolCall, ToolCallUpdate"
+    },
+    {
+      "id": "R3",
+      "issue": "Pi file I/O langsung ke disk, tidak lewat Zed",
+      "impact": "Sedang — Zed tidak tahu file berubah secara real-time",
+      "mitigation": "Override fs di Pi extension, route ke ACP write_text_file / read_text_file callbacks"
+    },
+    {
+      "id": "R4",
+      "issue": "Versi ACP SDK vs Zed internal ACP bisa tidak kompatibel",
+      "impact": "Rendah — ACP v1 sudah stabil",
+      "mitigation": "Pin ke @agentclientprotocol/sdk versi kompatibel, test dengan Zed terbaru"
+    },
+    {
+      "id": "R5",
+      "issue": "Pi belum tentu support programmatic/headless invocation tanpa TUI",
+      "impact": "Tinggi — perlu investigasi Pi API",
+      "mitigation": "Eksplorasi @mariozechner/pi-coding-agent API dulu sebelum implementasi (lihat next_exploration)"
+    }
+  ],
+
+  "next_exploration": [
+    "Lihat di prd.md untuk detail lengkap exploration plan"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@elianiva/pi-starship",
+  "version": "1.0.0",
+  "description": "Starship-style prompt for pi",
+  "keywords": [
+    "pi-package"
+  ],
+  "license": "MIT",
+  "author": "elianiva",
+  "main": "./index.ts",
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elianiva/dotfiles.git",
+    "directory": "packages/pi-starship"
+  },
+  "bugs": {
+    "url": "https://github.com/elianiva/dotfiles/issues"
+  },
+  "homepage": "https://github.com/elianiva/dotfiles/tree/main/packages/pi-starship",
+  "engines": {
+    "node": ">=20"
+  },
+  "exports": {
+    ".": "./index.ts"
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-ai": "*",
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*"
+  }
+}

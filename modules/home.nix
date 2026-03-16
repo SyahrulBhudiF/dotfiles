@@ -2,7 +2,11 @@
 let
   pi = ".pi/agent";
   link = config.lib.file.mkOutOfStoreSymlink;
-  starshipSettings = builtins.fromTOML (builtins.readFile ../starship/config.toml);
+  starshipConfigPath = ../starship/config.toml;
+  starshipSettings =
+    if builtins.pathExists starshipConfigPath
+    then builtins.fromTOML (builtins.readFile starshipConfigPath)
+    else { };
 in
 {
   targets.genericLinux.enable = true;
@@ -14,9 +18,13 @@ in
     homeDirectory = "/home/ryuko";
     stateVersion = "24.11";
 
-    packages = import ./packages.nix {
-      inherit pkgs flakePkgs;
-    };
+    packages =
+      (import ./packages.nix {
+        inherit pkgs flakePkgs;
+      })
+      ++ (import ./lsp.nix {
+        inherit pkgs;
+      });
 
     sessionVariables = {
       COMPOSER_HOME = "${config.home.homeDirectory}/.config/composer";

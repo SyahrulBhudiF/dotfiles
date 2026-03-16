@@ -10,7 +10,7 @@ import type {
   ToolResultEvent,
   ExtensionContext,
 } from "@mariozechner/pi-coding-agent";
-import { spawn, type ChildProcess } from "node:child_process";
+import { type ChildProcess } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve, extname } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
@@ -21,11 +21,13 @@ import {
   type MessageConnection,
 } from "vscode-jsonrpc/node";
 import type { Diagnostic as VSCodeDiagnostic } from "vscode-languageserver-protocol";
-import { LSP_SERVERS, LANGUAGE_MAP, type LspHandle, type LspServerInfo } from "./lsp-config.js";
+import { LSP_SERVERS, LANGUAGE_MAP, type LspHandle } from "./lsp-config.js";
 
 const DIAGNOSTICS_TIMEOUT_MS = 5000;
 const DIAGNOSTICS_DEBOUNCE_MS = 150;
 const LSP_CONNECTION_TIMEOUT_MS = 5000;
+
+const LSP_START_ON_READ = false;
 
 type Diagnostic = VSCodeDiagnostic;
 
@@ -175,33 +177,57 @@ class LspConnectionManager {
 
     connection.listen();
 
-    // Initialize with timeout using AbortSignal
+    // Initialize with hard timeout + cleanup on failure
     try {
-      await this.initializeConnection(connection, handle, rootDir, signal);
+      await Promise.race([
+        this.initializeConnection(connection, handle, rootDir, signal),
+        new Promise<never>((_, reject) => {
+          const timer = setTimeout(() => {
+            const error = new Error(`LSP initialize timeout after ${LSP_CONNECTION_TIMEOUT_MS}ms`);
+            error.name = "TimeoutError";
+            reject(error);
+          }, LSP_CONNECTION_TIMEOUT_MS);
+          signal.addEventListener("abort", () => {
+            clearTimeout(timer);
+            const error = new Error("LSP initialize aborted");
+            error.name = "AbortError";
+            reject(error);
+          }, { once: true });
+        }),
+      ]);
+      conn.initialized = true;
     } catch (e: any) {
-      if (e.name === "TimeoutError") {
-        ctx.ui.notify(`${name} LSP connection timed out, continuing anyway`, "warning");
-      } else {
-        throw e;
+      try {
+        connection.end();
+        connection.dispose();
+      } catch {
+        // ignore
       }
+      try {
+        handle.process.kill("SIGTERM");
+      } catch {
+        // ignore
+      }
+      this.connections.delete(key);
+      if (e.name === "TimeoutError" || e.name === "AbortError") {
+        ctx.ui.notify(`${name} LSP init timed out, skipped`, "warning");
+      } else {
+        ctx.ui.notify(`Failed to initialize ${name} LSP: ${e}`, "error");
+      }
+      throw e;
     }
-
-    conn.initialized = true;
-
     // Handle stderr
     handle.process.stderr?.on("data", (data: Buffer) => {
       const msg = data.toString().trim();
       if (msg) console.error(`[LSP:${name}]`, msg.slice(0, 200));
     });
-
     // Handle process exit
-    handle.process.on("exit", (code) => {
-      if (code && code !== 0) {
-        ctx.ui.notify(`${name} LSP exited with code ${code}`, "error");
+    handle.process.on("exit", (_code) => {
+      if (_code && _code !== 0) {
+        ctx.ui.notify(`${name} LSP exited with code ${_code}`, "error");
       }
       this.connections.delete(key);
     });
-
     ctx.ui.notify(`${name} LSP ready`, "success");
     return conn;
   }
@@ -210,7 +236,7 @@ class LspConnectionManager {
     connection: MessageConnection,
     handle: LspHandle,
     rootDir: string,
-    signal: AbortSignal,
+    _signal: AbortSignal,
   ): Promise<void> {
     await connection.sendRequest("initialize", {
       rootUri: pathToFileURL(rootDir).href,
@@ -388,7 +414,7 @@ class LspConnectionManager {
   }
 
   getStatus(): LspStatus[] {
-    return Array.from(this.connections.entries()).map(([key, conn]) => ({
+    return Array.from(this.connections.entries()).map(([, conn]) => ({
       name: conn.serverName,
       pid: conn.process.pid,
       rootDir: conn.rootDir,
@@ -425,7 +451,7 @@ function formatDiagnostics(diagnostics: Diagnostic[]): string {
       const line = (d.range?.start?.line ?? 0) + 1;
       const col = (d.range?.start?.character ?? 0) + 1;
       const severity = severityLabels[d.severity ?? 0] || "UNKNOWN";
-      const code = d.code ? `[${d.code}]` : "";
+      const _code = d.code ? `[${d.code}]` : "";
       // const source = d.source ? `${d.source}` : "";
       return `${severity} [${line}:${col}] ${d.message}`;
     })
@@ -441,29 +467,24 @@ function formatDuration(ms: number): string {
 export default function (pi: ExtensionAPI) {
   const manager = new LspConnectionManager();
 
-  // Warm up LSP on read, full diagnostics on write/edit
+  // Full diagnostics on write/edit. Read-triggered warmup disabled; too sticky.
   pi.on("tool_result", async (event: ToolResultEvent, ctx: ExtensionContext) => {
     const fileInfo = extractFileFromEvent(event);
     if (!fileInfo) return;
-
     const { path: filePath, isWrite } = fileInfo;
-    const absPath = resolve(ctx.cwd, filePath);
-
+    if (!isWrite && !LSP_START_ON_READ) return;
     const conns = await manager.getOrCreateConnections(filePath, ctx.cwd, ctx);
     if (conns.length === 0) return;
-
     let content: string;
     try {
       content = readFileSync(absPath, "utf-8");
     } catch {
       return;
     }
-
     const ext = extname(filePath);
     const languageId = LANGUAGE_MAP[ext];
     if (!languageId) return;
-
-    // For read operations: warm up and fetch existing diagnostics if available
+    // Optional warmup path, currently disabled by default.
     if (!isWrite) {
       await Promise.all(
         conns.map((conn) => manager.touchFile(conn, absPath, content, languageId, false)),

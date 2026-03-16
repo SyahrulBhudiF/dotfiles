@@ -139,6 +139,14 @@ export async function which(bin: string): Promise<string | undefined> {
   return undefined;
 }
 
+export async function whichAny(bins: string[]): Promise<string | undefined> {
+  for (const bin of bins) {
+    const found = await which(bin);
+    if (found) return found;
+  }
+  return undefined;
+}
+
 /**
  * Helper to find nearest file upward in directory tree
  */
@@ -188,6 +196,31 @@ function createHandle(
   return { process: proc, initialization };
 }
 
+async function verifyBinary(bin: string, args: string[] = ["--version"], cwd?: string): Promise<boolean> {
+  return await new Promise((resolve) => {
+    const proc = spawn(bin, args, {
+      cwd,
+      stdio: "ignore",
+    });
+
+    const timer = setTimeout(() => {
+      proc.kill("SIGTERM");
+      resolve(false);
+    }, 2000);
+
+    proc.on("error", () => {
+      clearTimeout(timer);
+      resolve(false);
+    });
+
+    proc.on("exit", (code) => {
+      clearTimeout(timer);
+      resolve(code === 0);
+    });
+  });
+}
+
+
 // ============================================================================
 // LSP Server Definitions
 // ============================================================================
@@ -223,7 +256,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
         }
       }
 
-      const bin = await which("typescript-language-server");
+      const bin = await whichAny(["typescript-language-server", "typescript-language-server.cmd"]);
       const initialization = tsserver ? { tsserver: { path: tsserver } } : undefined;
 
       if (bin) {
@@ -318,6 +351,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     async spawn(root) {
       const bin = await which("rust-analyzer");
       if (!bin) return undefined;
+      if (!(await verifyBinary(bin, ["--version"], root))) return undefined;
       return createHandle(bin, [], root);
     },
   },
@@ -347,8 +381,8 @@ export const LSP_SERVERS: LspServerInfo[] = [
       "pyrightconfig.json",
     ]),
     async spawn(root) {
-      let bin = await which("pyright-langserver");
-
+      // Try basedpyright first (common in Mason), then regular pyright
+      let bin = (await which("basedpyright-langserver")) || (await which("pyright-langserver"));
       if (!bin) {
         // Try bun x
         const bunBin = (await which("bun")) || "bun";
@@ -425,7 +459,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
       "package.json",
     ]),
     async spawn(root) {
-      const bin = await which("svelteserver");
+      const bin = await whichAny(["svelteserver", "svelte-language-server"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -444,7 +478,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
       "package.json",
     ]),
     async spawn(root) {
-      const bin = await which("vue-language-server");
+      const bin = await whichAny(["vue-language-server", "vls"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -463,7 +497,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
       "package.json",
     ]),
     async spawn(root, cwd) {
-      const bin = await which("astro-ls");
+      const bin = await whichAny(["astro-ls", "astro-language-server"]);
       if (!bin) return undefined;
 
       // Find typescript for astro
@@ -519,7 +553,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".cs"],
     root: nearestRoot([".slnx", ".sln", ".csproj", "global.json"]),
     async spawn(root) {
-      const bin = (await which("csharp-ls")) || (await which("omnisharp"));
+      const bin = await whichAny(["csharp-ls", "omnisharp", "OmniSharp"]);
       if (!bin) return undefined;
       return createHandle(bin, ["-lsp"], root);
     },
@@ -543,7 +577,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".ex", ".exs"],
     root: nearestRoot(["mix.exs", "mix.lock"]),
     async spawn(root) {
-      const bin = (await which("elixir-ls")) || (await which("language_server.sh"));
+      const bin = await whichAny(["elixir-ls", "language_server.sh", "elixir-ls.sh"]);
       if (!bin) return undefined;
       return createHandle(bin, [], root);
     },
@@ -561,7 +595,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
       "pom.xml",
     ]),
     async spawn(root) {
-      const bin = await which("kotlin-lsp");
+      const bin = await whichAny(["kotlin-lsp", "kotlin-language-server"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -621,7 +655,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".yaml", ".yml"],
     root: nearestRoot(["package.json"]),
     async spawn(root) {
-      const bin = await which("yaml-language-server");
+      const bin = await whichAny(["yaml-language-server", "yaml-language-server.cmd"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -633,7 +667,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".json", ".jsonc"],
     root: nearestRoot(["package.json"]),
     async spawn(root) {
-      const bin = await which("vscode-json-language-server");
+      const bin = await whichAny(["vscode-json-language-server", "vscode-json-language-server.cmd"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -645,7 +679,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".html"],
     root: nearestRoot(["package.json"]),
     async spawn(root) {
-      const bin = await which("vscode-html-language-server");
+      const bin = await whichAny(["vscode-html-language-server", "vscode-html-language-server.cmd"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -657,7 +691,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".css", ".scss", ".less"],
     root: nearestRoot(["package.json"]),
     async spawn(root) {
-      const bin = await which("vscode-css-language-server");
+      const bin = await whichAny(["vscode-css-language-server", "vscode-css-language-server.cmd"]);
       if (!bin) return undefined;
       return createHandle(bin, ["--stdio"], root);
     },
@@ -681,7 +715,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".tf", ".tfvars"],
     root: nearestRoot([".terraform.lock.hcl", "terraform.tfstate", "*.tf"]),
     async spawn(root) {
-      const bin = await which("terraform-ls");
+      const bin = await whichAny(["terraform-ls", "terraform-lsp"]);
       if (!bin) return undefined;
       return createHandle(bin, ["serve"], root);
     },
@@ -746,7 +780,7 @@ export const LSP_SERVERS: LspServerInfo[] = [
     extensions: [".prisma"],
     root: nearestRoot(["schema.prisma", "prisma/schema.prisma"]),
     async spawn(root) {
-      const bin = await which("prisma");
+      const bin = await whichAny(["prisma", "prisma-language-server"]);
       if (!bin) return undefined;
       return createHandle(bin, ["language-server"], root);
     },

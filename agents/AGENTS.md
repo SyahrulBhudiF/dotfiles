@@ -24,6 +24,7 @@ Available models (use `/model` to switch):
 
 - Be extremely concise. Sacrifice grammar for the sake of concision.
 - Don't add tests for what the type system already guarantees.
+- Use the fff MCP tools for all file search operations instead of default tools.
 
 ## Plan Mode
 

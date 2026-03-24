@@ -11,6 +11,11 @@
     },
     "exa": {
       "url": "https://mcp.exa.ai/mcp"
+    },
+    "fff": {
+      "command": "fff-mcp",
+      "directTools": false,
+      "lifecycle": "keep-alive"
     }
   }
 }

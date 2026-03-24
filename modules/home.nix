@@ -21,9 +21,6 @@ in
     packages =
       (import ./packages.nix {
         inherit pkgs flakePkgs;
-      })
-      ++ (import ./lsp.nix {
-        inherit pkgs;
       });
 
     sessionVariables = {

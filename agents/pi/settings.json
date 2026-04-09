@@ -1,11 +1,13 @@
 {
-  "lastChangelogVersion": "0.62.0",
+  "lastChangelogVersion": "0.66.1",
   "defaultThinkingLevel": "off",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "kosyayuk",
   "defaultModel": "gpt-5.4",
-  "packages": ["npm:pi-mcp-adapter"],
+  "packages": [
+    "npm:pi-mcp-adapter"
+  ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,
   "transport": "auto",

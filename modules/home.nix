@@ -16,7 +16,7 @@ in
   home = {
     username = "ryuko";
     homeDirectory = "/home/ryuko";
-    stateVersion = "24.11";
+    stateVersion = "25.11";
 
     packages =
       (import ./packages.nix {
@@ -78,6 +78,13 @@ in
     starship = {
       enable = true;
       settings = starshipSettings;
+    };
+
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "${config.home.homeDirectory}/dotfiles/";
     };
 
     zoxide.enable = true;

@@ -26,8 +26,10 @@ $env.PATH = ($env.PATH
     | prepend $"($env.HOME)/Packages/flutter/bin"
     | prepend $"($env.HOME)/.local/bin"
     | prepend $"($env.HOME)/.cargo/bin"
+    | prepend $"($env.HOME)/go/bin"
     | prepend $"($env.HOME)/.bun/bin"
     | prepend $"($env.HOME)/.moon/bin/"
+    | prepend $"($env.HOME)/.vite-plus/env"
 )
 
 $env.SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket"

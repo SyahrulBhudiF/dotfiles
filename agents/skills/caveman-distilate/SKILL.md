@@ -1,5 +1,5 @@
 ---
-name: caveman-distillate
+name: caveman-distilate
 description: >
   Ultra-compressed communication mode. Distills AI output to its core — ~65% fewer tokens
   while keeping full technical accuracy. Use when user says "caveman", "terse", "kurz",

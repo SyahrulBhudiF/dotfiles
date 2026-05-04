@@ -14,9 +14,10 @@ eval "$(zoxide init zsh)"
 export PATH="$HOME/Packages/flutter/bin:$PATH"
 export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/x86_64/stable/active/export/bin/com.google.Chrome"
 
-# remove any bun paths injected elsewhere
-export PATH="${PATH//:$HOME/.bun/bin/}"
-export PATH="${PATH//:$HOME/.bun/install/global/node_modules/@beads/bd/bin/}"
+# dedupe/remove paths safely in zsh
+typeset -U path PATH
+path=(${path:#$HOME/.bun/bin})
+path=(${path:#$HOME/.bun/install/global/node_modules/@beads/bd/bin})
 
 # Php Laravel alias command
 alias p="php artisan"

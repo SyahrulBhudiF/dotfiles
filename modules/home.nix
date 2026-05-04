@@ -29,9 +29,9 @@ in
     };
 
     file = {
-      ".zshrc".source = link "${config.home.homeDirectory}/dotfiles/zsh/.zshrc";
-      ".zshenv".source = link "${config.home.homeDirectory}/dotfiles/zsh/.zshenv";
-      ".profile".source = link "${config.home.homeDirectory}/dotfiles/.profile";
+      ".zshrc".source = ../zsh/.zshrc;
+      ".zshenv".source = ../zsh/.zshenv;
+      ".profile".source = ../.profile;
 
       # pi coding agent configs
       "${pi}/AGENTS.md".source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";

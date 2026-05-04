@@ -17,7 +17,12 @@ class GitCache extends VcsCache<GitRef> {
     const refs: GitRef[] = [];
 
     try {
-      // Get local and remote branches
+      await execVcs("git rev-parse --is-inside-work-tree", cwd);
+    } catch {
+      return refs;
+    }
+
+    try {
       const branchesOutput = await execVcs(
         "git branch -a --format='%(refname:short)'",
         cwd,
@@ -28,15 +33,18 @@ class GitCache extends VcsCache<GitRef> {
         refs.push({ name, type: "branch" });
       });
 
-      // Get tags
       const tagsOutput = await execVcs("git tag -l", cwd);
       tagsOutput.split("\n").forEach((line) => {
         const name = line.trim();
         if (!name) return;
         refs.push({ name, type: "tag" });
       });
+    } catch (err) {
+      console.error("[pi-ckers] Failed to fetch git refs:", err);
+      return refs;
+    }
 
-      // Get recent commits
+    try {
       const logOutput = await execVcs(
         "git log --oneline --format='%h %s' -20",
         cwd,
@@ -55,8 +63,8 @@ class GitCache extends VcsCache<GitRef> {
           description: msg.slice(0, 50),
         });
       });
-    } catch (err) {
-      console.error("[pi-ckers] Failed to fetch git data:", err);
+    } catch {
+      // Repo exists but may have no commits yet.
     }
 
     return refs;

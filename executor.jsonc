@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {
+      "kind": "openapi",
+      "spec": "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json",
+      "baseUrl": "https://api.github.com",
+      "namespace": "github_v3_rest_api"
+    },
+    {
+      "kind": "openapi",
+      "spec": "https://raw.githubusercontent.com/exa-labs/openapi-spec/refs/heads/master/exa-openapi-spec.yaml",
+      "baseUrl": "https://api.exa.ai",
+      "namespace": "exa_search_api"
+    },
+    {
+      "kind": "mcp",
+      "transport": "stdio",
+      "name": "Chrome DevTools",
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "namespace": "chrome_devtools"
+    }
+  ]
+}

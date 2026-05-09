@@ -56,6 +56,13 @@ in
         source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
         recursive = true;
       };
+
+      # Claude Code global skills
+      ".claude/skills" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
+        recursive = true;
+        force = true;
+      };
     };
   };
 

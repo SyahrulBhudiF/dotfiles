@@ -1,6 +1,6 @@
 {
-  "lastChangelogVersion": "0.72.1",
-  "defaultThinkingLevel": "off",
+  "lastChangelogVersion": "0.74.0",
+  "defaultThinkingLevel": "minimal",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",
@@ -12,7 +12,11 @@
   ],
   "packages": [
     "npm:pi-mcp-adapter",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:pi-subagents",
+    "npm:pi-web-access",
+    "npm:pi-executor",
+    "git:github.com/SyahrulBhudiF/pi-btw"
   ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,

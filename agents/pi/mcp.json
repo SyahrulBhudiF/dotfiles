@@ -1,16 +1,7 @@
 {
   "mcpServers": {
-    "opensrc": {
-      "type": "local",
-      "command": "bunx",
-      "args": [
-        "-y",
-        "opensrc-mcp"
-      ],
-      "directTools": false
-    },
-    "exa": {
-      "url": "https://mcp.exa.ai/mcp"
+    "executor": {
+      "url": "http://127.0.0.1:4788/mcp"
     },
     "fff": {
       "command": "fff-mcp",
@@ -19,4 +10,3 @@
     }
   }
 }
-

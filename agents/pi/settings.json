@@ -16,11 +16,11 @@
     "npm:pi-subagents",
     "npm:pi-web-access",
     "npm:pi-executor",
-    "git:github.com/SyahrulBhudiF/pi-btw"
+    "npm:pi-btw"
   ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,
   "transport": "auto",
   "doubleEscapeAction": "tree",
-  "hideThinkingBlock": false
+  "hideThinkingBlock": true
 }

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Fastfetch wrapper: auto-select profile by system theme.
+# Dark = half moon. Light = full moon.
+
+set -euo pipefail
+
+CONFIG_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+get_theme() {
+  if [[ -n "${FASTFETCH_THEME:-}" ]]; then
+    case "${FASTFETCH_THEME,,}" in
+      dark|night) echo dark; return ;;
+      light|day) echo light; return ;;
+    esac
+  fi
+
+  if command -v gsettings >/dev/null 2>&1; then
+    local scheme
+    scheme="$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || true)"
+    case "$scheme" in
+      *dark*) echo dark; return ;;
+      *light*|"'default'") echo light; return ;;
+    esac
+  fi
+
+  if [[ -f "$HOME/.config/kdeglobals" ]] && grep -qi 'ColorScheme.*dark' "$HOME/.config/kdeglobals"; then
+    echo dark
+    return
+  fi
+
+  if [[ -n "${COLORFGBG:-}" ]]; then
+    local bg="${COLORFGBG##*;}"
+    if [[ "$bg" =~ ^[0-9]+$ ]]; then
+      (( bg < 8 )) && echo dark || echo light
+      return
+    fi
+  fi
+
+  echo dark
+}
+
+case "$(get_theme)" in
+  light) exec fastfetch --config "$CONFIG_DIR/config-light.jsonc" "$@" ;;
+  *) exec fastfetch --config "$CONFIG_DIR/config-dark.jsonc" "$@" ;;
+esac

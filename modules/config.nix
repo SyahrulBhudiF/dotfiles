@@ -11,8 +11,9 @@ in
     };
     "ghostty/config".source =
       link "${dotfiles}/ghostty/config";
-    "fastfetch/config.jsonc".source =
-      link "${dotfiles}/fastfetch/config.jsonc";
+    "fastfetch/config.jsonc".source = link "${dotfiles}/fastfetch/config.jsonc";
+    "fastfetch/config-dark.jsonc".source = link "${dotfiles}/fastfetch/config-dark.jsonc";
+    "fastfetch/config-light.jsonc".source = link "${dotfiles}/fastfetch/config-light.jsonc";
     "nvim" = {
       source = link "${dotfiles}/nvim";
       recursive = true;

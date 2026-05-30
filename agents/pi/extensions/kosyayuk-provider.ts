@@ -26,7 +26,7 @@ export default function (pi: ExtensionAPI) {
 
   pi.registerProvider("kosyayuk", {
     baseUrl,
-    apiKey: "ANTHROPIC_AUTH_TOKEN",
+    apiKey: "$ANTHROPIC_AUTH_TOKEN",
     authHeader: true,
     api: "openai-completions",
     models: [

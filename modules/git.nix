@@ -5,6 +5,40 @@ let
 in
 {
   programs.gh.enable = true;
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "gh-cavos" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_cavos";
+        identitiesOnly = true;
+      };
+      "*" = {
+        forwardAgent = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        compression = false;
+        addKeysToAgent = "no";
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
+    };
+  };
+
+  home.file.".gitconfig-cavos".text = ''
+[user]
+  name = Syahrul Budi
+  email = syahrul.budi@cavos.io
+  signingkey = ~/.ssh/id_ed25519_cavos.pub
+
+'';
+
   programs.lazygit = {
     enable = true;
     settings = {
@@ -29,6 +63,11 @@ in
         email = "${email}";
       };
       credential.helper = "cache --timeout 86400";
+      includeIf = {
+        "gitdir:~/Documents/Codes/cavos/" = {
+          path = "~/.gitconfig-cavos";
+        };
+      };
       core = {
         compression = 9;
         editor = "nvim";
@@ -50,6 +89,12 @@ in
       # - ghq default is https, this omit -p option for the ssh push
       # - https://blog.n-z.jp/blog/2013-11-28-git-insteadof.html
       url = {
+        "git@gh-cavos:cavos-io/" = {
+          insteadOf = [
+            "git@github.com:cavos-io/"
+            "https://github.com/cavos-io/"
+          ];
+        };
         "git@github.com:" = {
           pushInsteadOf = [
             "git://github.com/"

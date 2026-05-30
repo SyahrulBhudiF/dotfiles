@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.74.0",
+  "lastChangelogVersion": "0.78.0",
   "defaultThinkingLevel": "minimal",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
@@ -16,7 +16,8 @@
     "npm:pi-subagents",
     "npm:pi-web-access",
     "npm:pi-executor",
-    "npm:pi-btw"
+    "npm:pi-btw",
+    "npm:pi-dynamic-workflows"
   ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,

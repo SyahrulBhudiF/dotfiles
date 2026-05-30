@@ -26,7 +26,7 @@ export default function enowxlabs(pi: ExtensionAPI) {
 
   pi.registerProvider("enowxlabs", {
     baseUrl,
-    apiKey: "ENOWX_AUTH_TOKEN",
+    apiKey: "$ENOWX_AUTH_TOKEN",
     authHeader: true,
     api: "openai-completions",
     models: [

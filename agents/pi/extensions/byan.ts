@@ -26,7 +26,7 @@ export default function (pi: ExtensionAPI) {
 
   pi.registerProvider("byan", {
     baseUrl,
-    apiKey: "BYAN_AUTH_TOKEN",
+    apiKey: "$BYAN_AUTH_TOKEN",
     authHeader: true,
     api: "openai-completions",
     models: [

@@ -49,3 +49,6 @@ try { source ~/dotfiles/nu/secrets.nu }
 alias kotofetch = ~/dotfiles/nu/kotofetch
 $env.config = ($env.config? | default {} | merge { show_banner: false })
 ^~/dotfiles/nu/hello.nu
+
+# Google Cloud CLI
+$env.PATH = ($env.PATH | prepend "/home/ryuko/Downloads/google-cloud-sdk/bin")

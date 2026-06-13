@@ -101,7 +101,16 @@ let models = ($raw.data | sort-by id | each {|m|
   }
 })
 
-print $"Found ($models | length) models. Generating ($out_file) ..."
+print $"Found ($models | length) models:"
+
+$models
+| select id name compat reasoning input contextWindow maxTokens cost
+| update input {|row| $row.input | from json | str join ", " }
+| update cost {|row| $"in:($row.cost.input) out:($row.cost.output) cr:($row.cost.cache_read) cw:($row.cost.cache_write)" }
+| table -e
+| print
+
+print $"Generating ($out_file) ..."
 
 # Build the models array entries
 let model_entries = ($models | each {|m|
@@ -147,7 +156,7 @@ export default function (pi: ExtensionAPI) {
 
   pi.registerProvider("kosyayuk", {
     baseUrl,
-    apiKey: "ANTHROPIC_AUTH_TOKEN",
+    apiKey: "$ANTHROPIC_AUTH_TOKEN",
     authHeader: true,
     api: "openai-completions",
     models: ['

@@ -16,6 +16,12 @@ in
         identityFile = "~/.ssh/id_ed25519_cavos";
         identitiesOnly = true;
       };
+      "gh-najla" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_najla";
+        identitiesOnly = true;
+      };
       "*" = {
         forwardAgent = false;
         serverAliveInterval = 0;
@@ -36,6 +42,14 @@ in
   name = Syahrul Budi
   email = syahrul.budi@cavos.io
   signingkey = ~/.ssh/id_ed25519_cavos.pub
+
+'';
+
+  home.file.".gitconfig-najla".text = ''
+[user]
+  name = Najla Nuricia
+  email = najlalaudy@gmail.com
+  signingkey = ~/.ssh/id_ed25519_najla.pub
 
 '';
 
@@ -66,6 +80,9 @@ in
       includeIf = {
         "gitdir:~/Documents/Codes/cavos/" = {
           path = "~/.gitconfig-cavos";
+        };
+        "gitdir:~/Documents/Codes/najla/" = {
+          path = "~/.gitconfig-najla";
         };
       };
       core = {

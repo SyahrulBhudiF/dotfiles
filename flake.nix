@@ -25,15 +25,21 @@
       url = "github:usagi-flow/evil-helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    herdr = {
+      url = "github:ogulcancelik/herdr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix,... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, herdr, ... }:
     let
       system = "x86_64-linux";
 
       flakePkgs = {
         bash-env-json = bash-env-json.packages.${system}.default;
         evil-helix = evil-helix.packages.${system}.default;
+        herdr = herdr.packages.${system}.default;
       };
 
     in {

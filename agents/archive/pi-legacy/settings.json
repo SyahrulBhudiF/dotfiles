@@ -1,6 +1,6 @@
 {
-  "lastChangelogVersion": "0.79.3",
-  "defaultThinkingLevel": "minimal",
+  "lastChangelogVersion": "0.80.3",
+  "defaultThinkingLevel": "off",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",
@@ -18,7 +18,10 @@
     "npm:pi-executor",
     "npm:pi-btw",
     "npm:pi-dynamic-workflows",
-    "npm:@ff-labs/pi-fff"
+    "npm:@ff-labs/pi-fff",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:pi-intercom",
+    "npm:pi-prompt-template-model"
   ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,

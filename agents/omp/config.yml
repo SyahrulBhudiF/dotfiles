@@ -1,0 +1,14 @@
+theme: 
+  dark: rose-pine
+  light: rose-pine-dawn
+statusLine:
+  transparent: true
+modelRoles: 
+  default: kosyayuk/gpt-5.5
+  smol: kosyayuk/gemini-3-flash
+  plan: kosyayuk/gpt-5.5
+setupVersion: 1
+providers: 
+  webSearch: exa
+  antigravityEndpoint: auto
+  image: auto

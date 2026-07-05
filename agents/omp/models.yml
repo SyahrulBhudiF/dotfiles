@@ -1,0 +1,21 @@
+providers:
+  kosyayuk:
+    baseUrl: https://ai.naufal.work/v1
+    apiKey: ANTHROPIC_AUTH_TOKEN
+    api: openai-completions
+    auth: apiKey
+    models:
+      - id: gpt-5.5
+        name: Gpt 5 5
+        reasoning: false
+        input: [text, image]
+        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }
+        contextWindow: 128000
+        maxTokens: 64000
+      - id: gemini-3-flash
+        name: Gemini 3 Flash
+        reasoning: false
+        input: [text, image]
+        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }
+        contextWindow: 200000
+        maxTokens: 64000

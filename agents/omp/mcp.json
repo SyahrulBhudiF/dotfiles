@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "fff": {
+      "command": "fff-mcp",
+      "directTools": false,
+      "lifecycle": "keep-alive"
+    }
+  }
+}

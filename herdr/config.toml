@@ -1,0 +1,15 @@
+[terminal]
+default_shell = "nu"
+shell_mode = "non_login"
+
+[keys]
+new_tab = "ctrl+shift+h"
+
+[theme]
+name = "rose-pine"
+auto_switch = true
+light_name = "rose-pine-dawn"
+dark_name = "rose-pine"
+
+[ui]
+agent_panel_sort = "spaces"

@@ -1,6 +1,6 @@
 { lib, pkgs, inputs, flakePkgs, config, ... }:
 let
-  pi = ".pi/agent";
+  omp = ".omp/agent";
   link = config.lib.file.mkOutOfStoreSymlink;
   starshipConfigPath = ../starship/config.toml;
   starshipSettings =
@@ -33,23 +33,22 @@ in
       ".zshenv".source = ../zsh/.zshenv;
       ".profile".source = ../.profile;
 
-      # pi coding agent configs
-      "${pi}/AGENTS.md".source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";
-      "${pi}/settings.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/settings.json";
-      "${pi}/mcp.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/mcp.json";
-      "${pi}/package.json".source = link "${config.home.homeDirectory}/dotfiles/agents/pi/package.json";
-      "${pi}/extensions" = {
-        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/extensions";
+      # OMP coding agent configs
+      "${omp}/AGENTS.md".source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";
+      "${omp}/config.yml".source = link "${config.home.homeDirectory}/dotfiles/agents/omp/config.yml";
+      "${omp}/models.yml".source = link "${config.home.homeDirectory}/dotfiles/agents/omp/models.yml";
+      "${omp}/mcp.json".source = link "${config.home.homeDirectory}/dotfiles/agents/omp/mcp.json";
+      "${omp}/themes" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/omp/themes";
         recursive = true;
       };
-      "${pi}/themes" = {
-        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/themes";
-        recursive = true;
-      };
-      "${pi}/skills" = {
+      "${omp}/skills" = {
         source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
         recursive = true;
       };
+
+      # Herdr Plus configs
+      ".config/herdr/plugins/config/cloudmanic.herdr-plus/projects/dotfiles-omp.toml".source = link "${config.home.homeDirectory}/dotfiles/herdr-plus/projects/dotfiles-omp.toml";
 
       # antigravity (gemini cli) global skills
       ".gemini/antigravity/skills" = {

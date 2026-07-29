@@ -1,14 +1,18 @@
 theme: 
   dark: rose-pine
   light: rose-pine-dawn
-statusLine:
+statusLine: 
   transparent: true
 modelRoles: 
-  default: kosyayuk/gpt-5.5
-  smol: kosyayuk/gemini-3-flash
+  default: kosyayuk/gpt-5.6-terra
+  smol: opencode-zen/mimo-v2.5-free:off
   plan: kosyayuk/gpt-5.5
 setupVersion: 1
 providers: 
   webSearch: exa
   antigravityEndpoint: auto
   image: auto
+branchSummary: 
+  enabled: true
+compaction: 
+  thresholdPercent: 70

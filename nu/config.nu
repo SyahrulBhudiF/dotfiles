@@ -43,7 +43,10 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 alias hms = nix run nixpkgs#home-manager -- switch --flake .#ryuko
 alias hmb = nix run nixpkgs#home-manager -- switch --flake .#ryuko -b backup
 alias h = herdr
+alias p = pi
 alias o = omp
+alias update = sudo dnf update -y
+alias cd = __zoxide_z
 
 # Load environment secrets safely
 try { source ~/dotfiles/nu/secrets.nu }
@@ -54,3 +57,4 @@ $env.config = ($env.config? | default {} | merge { show_banner: false })
 
 # Google Cloud CLI
 $env.PATH = ($env.PATH | prepend "/home/ryuko/Downloads/google-cloud-sdk/bin")
+$env.PLANNOTATOR_REMOTE = "1"

@@ -1,5 +1,20 @@
 local o = vim.opt
 
+-- Disable built-in plugins for faster startup
+local disabled_builtins = {
+  'gzip',
+  'matchit',
+  'matchparen',
+  'netrwPlugin',
+  'tarPlugin',
+  'tohtml',
+  'tutor',
+  'zipPlugin',
+}
+for _, plugin in ipairs(disabled_builtins) do
+  vim.g['loaded_' .. plugin] = 1
+end
+
 -- o.number         = true -- enable line number
 -- o.relativenumber = true -- enable relative line number
 o.undofile       = true -- persistent undo
@@ -10,6 +25,7 @@ o.cursorline     = true -- enable cursor line
 o.cursorlineopt  = "both"
 o.expandtab      = true -- use spaces instead of tabs
 o.autowrite      = true -- auto write buffer when it's not focused
+o.autoread       = true -- auto reload changed files
 o.hidden         = true -- keep hidden buffers
 o.hlsearch       = true -- highlight matching search
 o.ignorecase     = true -- case insensitive on search..
@@ -25,7 +41,11 @@ o.splitright     = true -- split right instead of left
 o.splitkeep      = "screen" -- stabilize split
 o.startofline    = false -- don't go to the start of the line when moving to another file
 o.swapfile       = false -- disable swapfile
+o.smoothscroll   = true -- smooth scrolling
 o.termguicolors  = true -- true colours for better experience
+o.undolevels     = 1000 -- more undo history
+o.winborder      = 'single' -- default border for floating windows
+o.pumborder      = 'single' -- border for completion popup
 o.wrap           = false -- don't wrap lines
 o.writebackup    = false -- disable backup
 o.backupcopy     = "yes" -- fix weirdness for stuff that replaces the entire file when hot reloading
@@ -56,14 +76,14 @@ o.listchars      = {
   tab = "  ",
 } -- set listchars
 o.mouse          = "nvi" -- enable mouse support in normal, insert, and visual mode
-o.shortmess      = "csa" -- disable some stuff on shortmess
+o.shortmess      = "filnxtToOFAs" -- disable some messages, keep intro
 -- o.signcolumn     = "yes:1" -- enable sign column all the time 4 column
 -- o.colorcolumn    = { "80" } -- 80 chars color column
-o.shell          = "/run/current-system/sw/bin/bash" -- use bash instead of zsh
+o.shell          = vim.fn.exepath("bash") -- use bash instead of zsh
 o.pumheight      = 10 -- limit completion items
 o.re             = 0 -- set regexp engine to auto
-o.scrolloff      = 2 -- make scrolling better
-o.sidescroll     = 2 -- make scrolling better
+o.scrolloff      = 8 -- keep more context lines above/below cursor
+o.sidescroll     = 8 -- smooth horizontal scroll padding
 o.shiftwidth     = 2 -- set indentation width
 o.sidescrolloff  = 15 -- make scrolling better
 o.tabstop        = 2 -- tabsize

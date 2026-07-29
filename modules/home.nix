@@ -1,5 +1,6 @@
 { lib, pkgs, inputs, flakePkgs, config, ... }:
 let
+  pi = ".pi/agent";
   omp = ".omp/agent";
   link = config.lib.file.mkOutOfStoreSymlink;
   starshipConfigPath = ../starship/config.toml;
@@ -33,6 +34,39 @@ in
       ".zshenv".source = ../zsh/.zshenv;
       ".profile".source = ../.profile;
 
+      # Pi coding agent configs
+      "${pi}/AGENTS.md" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";
+        force = true;
+      };
+      "${pi}/settings.json" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/settings.json";
+        force = true;
+      };
+      "${pi}/mcp.json" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/mcp.json";
+        force = true;
+      };
+      "${pi}/package.json" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/package.json";
+        force = true;
+      };
+      "${pi}/extensions" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/extensions";
+        recursive = true;
+        force = true;
+      };
+      "${pi}/themes" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/pi/themes";
+        recursive = true;
+        force = true;
+      };
+      "${pi}/skills" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
+        recursive = true;
+        force = true;
+      };
+
       # OMP coding agent configs
       "${omp}/AGENTS.md".source = link "${config.home.homeDirectory}/dotfiles/agents/AGENTS.md";
       "${omp}/config.yml".source = link "${config.home.homeDirectory}/dotfiles/agents/omp/config.yml";
@@ -61,6 +95,28 @@ in
         source = link "${config.home.homeDirectory}/dotfiles/agents/skills";
         recursive = true;
         force = true;
+      };
+    };
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
+      settings = {
+        globalOptions.Hotkey.TriggerKeys = "Control+space";
+        inputMethod = {
+          GroupOrder."0" = "Default";
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "keyboard-us";
+          };
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "mozc";
+        };
       };
     };
   };

@@ -1,5 +1,6 @@
 return {
   "obsidian-nvim/obsidian.nvim",
+  enable = false,
   version = "*",
   ft = "markdown",
   ---@module 'obsidian'

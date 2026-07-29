@@ -23,13 +23,13 @@ M.borders = {
 	-- {"█", "PaddingBorder"}
 }
 
-function M.lsp.additional_capabilities(client)
-	if client.supports_method("textDocument/codeLens") then
-		vim.lsp.codelens.refresh()
-	end
+function M.lsp.additional_capabilities(client, bufnr)
+	-- if client:supports_method("textDocument/codeLens") then
+	--   vim.lsp.codelens.enable(true, { bufnr = bufnr })
+	-- end
 
-	if client.supports_method("textDocument/inlayHint") then
-		vim.lsp.inlay_hint.enable(true)
+	if client:supports_method("textDocument/inlayHint") then
+		vim.lsp.inlay_hint.enable(false)
 	end
 end
 
@@ -83,7 +83,16 @@ function M.lsp.additional_mappings(bufnr)
 	})
 
 	vim.keymap.set("n", "<Leader>gr", vim.lsp.buf.references, {
-		desc = "Show references",
+		desc = "Find references",
+		noremap = true,
+		silent = true,
+		buffer = bufnr,
+	})
+
+	vim.keymap.set("n", "<Leader>cf", function()
+		require("conform").format({ async = false, lsp_format = "fallback" })
+	end, {
+		desc = "Format document",
 		noremap = true,
 		silent = true,
 		buffer = bufnr,

@@ -1,6 +1,6 @@
 {
   "lastChangelogVersion": "0.82.1",
-  "defaultThinkingLevel": "max",
+  "defaultThinkingLevel": "high",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
   "defaultProvider": "kosyayuk",

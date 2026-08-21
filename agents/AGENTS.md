@@ -10,6 +10,7 @@
 - Treat the project as greenfield unless stated otherwise.
 - You are not alone, expect parallel changes in unrelated files by others use delegate.
 - Report the problem first, then the solution.
+- Dont use Agent-Browser if user not mentioned it.
 - Prefer caveman-distilate style: terse, dense, no filler.
 
 ## Plan Mode

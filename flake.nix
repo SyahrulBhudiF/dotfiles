@@ -26,20 +26,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    herdr = {
-      url = "github:ogulcancelik/herdr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, herdr, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, ... }:
     let
       system = "x86_64-linux";
 
       flakePkgs = {
         bash-env-json = bash-env-json.packages.${system}.default;
         evil-helix = evil-helix.packages.${system}.default;
-        herdr = herdr.packages.${system}.default;
       };
 
     in {

@@ -42,6 +42,26 @@ function formatDuration(ms: number): string {
 const WIDGET_KEY = Symbol.for("pi-delegate/widget");
 const STATUS_KEY = Symbol.for("pi-delegate/status");
 const ABORT_KEY = Symbol.for("pi-delegate/abort");
+const PANES_KEY = Symbol.for("pi-delegate/panes");
+
+function trackedPanes(): Set<string> {
+  let panes = (globalThis as any)[PANES_KEY] as Set<string> | undefined;
+  if (!panes) {
+    panes = new Set();
+    (globalThis as any)[PANES_KEY] = panes;
+  }
+  return panes;
+}
+
+function closeTrackedPane(paneId: string): void {
+  closePane(paneId);
+  trackedPanes().delete(paneId);
+}
+
+function closeAllTrackedPanes(): void {
+  for (const paneId of trackedPanes()) closePane(paneId);
+  trackedPanes().clear();
+}
 
 function getAbortSignal(): AbortSignal {
   let ctrl = (globalThis as any)[ABORT_KEY] as AbortController | undefined;
@@ -54,6 +74,7 @@ function getAbortSignal(): AbortSignal {
 
 // On reload: kill old state
 {
+  closeAllTrackedPanes();
   const p = (globalThis as any)[ABORT_KEY] as AbortController | undefined;
   if (p) p.abort();
   (globalThis as any)[ABORT_KEY] = new AbortController();
@@ -324,6 +345,7 @@ async function launchDelegate(
 
   // Create herdr tab
   const paneId = createTab(name, cwd);
+  trackedPanes().add(paneId);
   renamePane(paneId, `[${name}]`);
 
   // Build pi command
@@ -401,10 +423,14 @@ async function watchDelegate(
   signal: AbortSignal,
   pi: ExtensionAPI,
 ): Promise<void> {
-  const result = await pollForDone(r, signal);
-  closePane(r.paneId);
-  running.delete(r.id);
-  refreshWidget();
+  let result: DelegateResult;
+  try {
+    result = await pollForDone(r, signal);
+  } finally {
+    closeTrackedPane(r.paneId);
+    running.delete(r.id);
+    refreshWidget();
+  }
 
   const elapsed = formatDuration(result.elapsedMs);
   const ref = result.sessionFile ? `\n\nSession: \`${result.sessionFile}\`` : "";
@@ -436,7 +462,7 @@ async function runSingleAndWait(
     const result = await pollForDone(r, signal);
     return result;
   } finally {
-    closePane(r.paneId);
+    closeTrackedPane(r.paneId);
     running.delete(r.id);
   }
 }
@@ -478,10 +504,9 @@ export function createDelegateTool(pi: ExtensionAPI): ToolDefinition<typeof Dele
     const s = (globalThis as any)[STATUS_KEY] as ReturnType<typeof setInterval> | undefined;
     if (s) clearInterval(s);
     (globalThis as any)[STATUS_KEY] = null;
-    // Abort all running delegates
-    for (const r of running.values()) {
-      r.abortController.abort();
-    }
+    // Abort polling and close panes so their child processes cannot outlive the parent.
+    for (const r of running.values()) r.abortController.abort();
+    closeAllTrackedPanes();
     running.clear();
   });
 

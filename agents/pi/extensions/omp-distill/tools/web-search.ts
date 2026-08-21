@@ -90,7 +90,7 @@ export function createWebSearchTool(pi: ExtensionAPI) {
     description:
       "Search the web using Exa. Returns an AI-synthesized answer with source citations. " +
       "For comprehensive research, prefer queries (plural) with 2-4 varied angles over a single query. " +
-      "Requires EXA_API_KEY env var for advanced features; works without one via Exa MCP (free).",
+      "Uses Exa MCP; EXA_API_KEY raises limits and enables advanced filtered search.",
     promptSnippet: "Use for web research questions. Prefer {queries:[...]} with 2-4 varied angles over a single query for broader coverage.",
     parameters: params,
 

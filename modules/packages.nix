@@ -14,7 +14,6 @@ with pkgs; [
   qpdf          # PDF manipulation tool
   jujutsu       # Distributed version control system
   mosh          # Mobile shell
-  flakePkgs.herdr
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system

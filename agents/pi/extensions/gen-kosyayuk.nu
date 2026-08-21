@@ -46,16 +46,10 @@ let models = ($raw.data | sort-by id | each {|m|
   }
 
   # Determine context window
-  let ctx = if ($id | str contains "minimax") {
-    1000000
-  } else if ($id =~ "qwen") {
-    131072
-  } else if ($id | str contains "gpt-3") {
-    16384
-  } else if ($id =~ "gpt|deepseek") {
-    128000
+  let ctx = if ($id =~ "gpt|claude") {
+    272000
   } else {
-    200000
+    1000000
   }
 
   # Determine max tokens

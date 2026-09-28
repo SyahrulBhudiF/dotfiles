@@ -33,6 +33,7 @@ $env.PATH = ($env.PATH
 )
 
 $env.SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket"
+$env.SHELL = (which nu | get path.0)
 
 source ~/.zoxide.nu
 
@@ -44,12 +45,18 @@ alias hms = nix run nixpkgs#home-manager -- switch --flake .#ryuko
 alias hmb = nix run nixpkgs#home-manager -- switch --flake .#ryuko -b backup
 alias h = herdr
 alias p = pi
+def --wrapped bb [...args] {
+    with-env { BB_PI_BRIDGE_COMMAND: ($env.HOME | path join ".bun/bin/pi") } {
+        ^npx bb-app@latest ...$args
+    }
+}
 alias o = omp
 alias update = sudo dnf update -y
 alias cd = __zoxide_z
 
 # Load environment secrets safely
 try { source ~/dotfiles/nu/secrets.nu }
+hide-env --ignore-errors ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_BASE_URL ANTHROPIC_MODEL ANTHROPIC_DEFAULT_OPUS_MODEL ANTHROPIC_DEFAULT_SONNET_MODEL ANTHROPIC_DEFAULT_HAIKU_MODEL
 
 alias kotofetch = ~/dotfiles/nu/kotofetch
 $env.config = ($env.config? | default {} | merge { show_banner: false })

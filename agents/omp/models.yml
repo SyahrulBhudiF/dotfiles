@@ -1,358 +1,421 @@
 providers:
   kosyayuk:
     baseUrl: https://ai.naufal.work/v1
-    apiKey: ANTHROPIC_AUTH_TOKEN
+    apiKey: AUTH_TOKEN
     api: openai-completions
     auth: apiKey
     models:
-      - id: auto
-        name: Auto
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: claude-haiku-4-5
-        name: Claude Haiku 4 5
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0.8
-          output: 4
-          cacheRead: 0.08
-          cacheWrite: 1
-        contextWindow: 272000
-        maxTokens: 8192
-      - id: claude-opus-4-6
-        name: Claude Opus 4 6
-        reasoning: true
-        input:
-          - text
-          - image
-        cost:
-          input: 5
-          output: 25
-          cacheRead: 0.5
-          cacheWrite: 6.25
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: claude-opus-4-8
-        name: Claude Opus 4 8
-        reasoning: true
-        input:
-          - text
-          - image
-        cost:
-          input: 5
-          output: 25
-          cacheRead: 0.5
-          cacheWrite: 6.25
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: claude-opus-5
-        name: Claude Opus 5
-        reasoning: true
-        input:
-          - text
-          - image
-        cost:
-          input: 5
-          output: 25
-          cacheRead: 0.5
-          cacheWrite: 6.25
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: claude-sonnet-4-5
-        name: Claude Sonnet 4 5
-        reasoning: true
-        input:
-          - text
-          - image
-        cost:
-          input: 3
-          output: 15
-          cacheRead: 0.3
-          cacheWrite: 3.75
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: claude-sonnet-4-6
-        name: Claude Sonnet 4 6
-        reasoning: true
-        input:
-          - text
-          - image
-        cost:
-          input: 3
-          output: 15
-          cacheRead: 0.3
-          cacheWrite: 3.75
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: gemini-3.1-flash-image
-        name: Gemini 3 1 Flash Image
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gemini-3.1-flash-lite
-        name: Gemini 3 1 Flash Lite
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gemini-3.1-pro
-        name: Gemini 3 1 Pro
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gemini-3.5-flash
-        name: Gemini 3 5 Flash
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gemini-3.6-flash
-        name: Gemini 3 6 Flash
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gemini-3.7-flash
-        name: Gemini 3 7 Flash
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: glm-5
-        name: Glm 5
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: gpt-5.4-mini
-        name: Gpt 5 4 Mini
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: gpt-5.6-luna
-        name: Gpt 5 6 Luna
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: gpt-image-2
-        name: Gpt Image 2
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 272000
-        maxTokens: 64000
-      - id: grok-4.5
-        name: Grok 4 5
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-4.6
-        name: Grok 4 6
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-composer-2.5-fast
-        name: Grok Composer 2 5 Fast
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-imagine-image
-        name: Grok Imagine Image
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-imagine-image-2.0
-        name: Grok Imagine Image 2 0
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-imagine-video
-        name: Grok Imagine Video
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: grok-imagine-video-1.5
-        name: Grok Imagine Video 1 5
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: mimo-v2.5
-        name: Mimo V2 5
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: muse-spark-1.2
-        name: Muse Spark 1 2
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
-      - id: ox-alpha
-        name: Ox Alpha
-        reasoning: false
-        input:
-          - text
-          - image
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-        contextWindow: 1000000
-        maxTokens: 64000
+    - id: auto
+      name: Auto
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: claude-haiku-4-5
+      name: Claude Haiku 4 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0.8
+        output: 4
+        cacheRead: 0.08
+        cacheWrite: 1
+      contextWindow: 272000
+      maxTokens: 8192
+    - id: claude-office
+      name: Claude Office
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: claude-opus-4-6
+      name: Claude Opus 4 6
+      reasoning: true
+      input:
+      - text
+      - image
+      cost:
+        input: 5
+        output: 25
+        cacheRead: 0.5
+        cacheWrite: 6.25
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: claude-sonnet-4-5
+      name: Claude Sonnet 4 5
+      reasoning: true
+      input:
+      - text
+      - image
+      cost:
+        input: 3
+        output: 15
+        cacheRead: 0.3
+        cacheWrite: 3.75
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: claude-sonnet-4-6
+      name: Claude Sonnet 4 6
+      reasoning: true
+      input:
+      - text
+      - image
+      cost:
+        input: 3
+        output: 15
+        cacheRead: 0.3
+        cacheWrite: 3.75
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: deepseek-v4.1-flash
+      name: Deepseek V4 1 Flash
+      reasoning: false
+      input:
+      - text
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 16384
+    - id: gemini-3.1-flash-image
+      name: Gemini 3 1 Flash Image
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gemini-3.1-flash-lite
+      name: Gemini 3 1 Flash Lite
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gemini-3.1-pro
+      name: Gemini 3 1 Pro
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gemini-3.6-flash
+      name: Gemini 3 6 Flash
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gemini-3.7-flash
+      name: Gemini 3 7 Flash
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gemini-3.8-flash
+      name: Gemini 3 8 Flash
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: glm-5
+      name: Glm 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: glm-5.1
+      name: Glm 5 1
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: glm-5.2
+      name: Glm 5 2
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: glm-5.3
+      name: Glm 5 3
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: gpt-5.6-luna
+      name: Gpt 5 6 Luna
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: gpt-5.6-sol
+      name: Gpt 5 6 Sol
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: gpt-5.6-terra
+      name: Gpt 5 6 Terra
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: gpt-image-2
+      name: Gpt Image 2
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 272000
+      maxTokens: 64000
+    - id: grok-4.5
+      name: Grok 4 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: grok-4.6
+      name: Grok 4 6
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: grok-composer-2.5-fast
+      name: Grok Composer 2 5 Fast
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: grok-imagine-image-2.0
+      name: Grok Imagine Image 2 0
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: grok-imagine-video-1.5
+      name: Grok Imagine Video 1 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: kimi-k2.5
+      name: Kimi K2 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: kimi-k2.6
+      name: Kimi K2 6
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: kimi-k2.7
+      name: Kimi K2 7
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: kimi-k3
+      name: Kimi K3
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: mimo-v2.5
+      name: Mimo V2 5
+      reasoning: false
+      input:
+      - text
+      - image
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000
+    - id: minimax-m3
+      name: Minimax M3
+      reasoning: false
+      input:
+      - text
+      cost:
+        input: 0
+        output: 0
+        cacheRead: 0
+        cacheWrite: 0
+      contextWindow: 1000000
+      maxTokens: 64000

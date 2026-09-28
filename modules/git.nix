@@ -1,9 +1,12 @@
-{ pkgs, config, ... }:
-let
-  email = "syahrul4w@gmail.com";
-  name = "ryuko";
-in
+{ den, ... }:
 {
+  den.aspects.ryuko.homeManager =
+    { config, ... }:
+    let
+      email = "syahrul4w@gmail.com";
+      name = "ryuko";
+    in
+    {
   programs.gh.enable = true;
 
   programs.ssh = {
@@ -183,5 +186,6 @@ in
         ];
       };
     };
-  };
+      };
+    };
 }

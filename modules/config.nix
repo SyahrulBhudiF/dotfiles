@@ -1,9 +1,12 @@
-{ config, ... }:
-let
-  link = config.lib.file.mkOutOfStoreSymlink;
-  dotfiles = "${config.home.homeDirectory}/dotfiles";
-in
+{ den, ... }:
 {
+  den.aspects.ryuko.homeManager =
+    { config, ... }:
+    let
+      link = config.lib.file.mkOutOfStoreSymlink;
+      dotfiles = "${config.home.homeDirectory}/dotfiles";
+    in
+    {
   xdg.configFile = {
     "jjui" = {
       source = link "${dotfiles}/jjui";
@@ -24,5 +27,6 @@ in
       source = link "${dotfiles}/agents/skills";
       recursive = true;
     };
-  };
+      };
+    };
 }

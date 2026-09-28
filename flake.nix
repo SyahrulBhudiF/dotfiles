@@ -26,35 +26,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    den.url = "github:denful/den";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixGL, bash-env-json, evil-helix, ... }:
+  outputs = inputs@{ nixpkgs, bash-env-json, evil-helix, ... }:
     let
       system = "x86_64-linux";
-
       flakePkgs = {
         bash-env-json = bash-env-json.packages.${system}.default;
         evil-helix = evil-helix.packages.${system}.default;
       };
-
-    in {
-      homeConfigurations = {
-        ryuko = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-
-          extraSpecialArgs = {
-            inherit inputs flakePkgs;
-          };
-
-          modules = [
-            ./modules/home.nix
-            ./modules/git.nix
-            ./modules/config.nix
-            ./modules/terminal.nix
-          ];
-        };
-      };
-    };
+    in
+    (nixpkgs.lib.evalModules {
+      modules = [
+        inputs.den.flakeModule
+        ./modules/den.nix
+        ./modules/home.nix
+        ./modules/git.nix
+        ./modules/config.nix
+        ./modules/terminal.nix
+      ];
+      specialArgs = { inherit inputs flakePkgs; };
+    }).config.flake;
 
   nixConfig = {
     substituters = [

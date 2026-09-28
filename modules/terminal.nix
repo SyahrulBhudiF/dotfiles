@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
-let
-  link = config.lib.file.mkOutOfStoreSymlink;
-in
+{ den, ... }:
 {
+  den.aspects.ryuko.homeManager =
+    { config, pkgs, ... }:
+    let
+      link = config.lib.file.mkOutOfStoreSymlink;
+    in
+    {
   home.packages = [
     (pkgs.writeShellScriptBin "ghostty" ''
       exec ${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${pkgs.ghostty}/bin/ghostty "$@"
@@ -12,5 +15,6 @@ in
   xdg.configFile = {
     "ghostty/config".source =
       link "${config.home.homeDirectory}/dotfiles/ghostty/config";
-  };
+      };
+    };
 }

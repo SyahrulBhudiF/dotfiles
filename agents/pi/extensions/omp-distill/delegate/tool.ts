@@ -191,12 +191,12 @@ function resultFromSidecar(
   startTime: number,
 ): DelegateResult {
   const elapsedMs = Date.now() - startTime;
+  const summary = sessionFile ? findLastAssistant([...getNewEntries(sessionFile, 0)]) : null;
   if (sidecar.type === "error") {
-    const summary = sessionFile ? findLastAssistant([...getNewEntries(sessionFile, 0)]) : null;
     return { name, agent: agentName, task, summary: summary ?? sidecar.error ?? "Unknown error", sessionFile, exitCode: 1, elapsedMs, error: sidecar.error };
   }
-  const summary = sessionFile ? findLastAssistant([...getNewEntries(sessionFile, 0)]) : null;
-  return { name, agent: agentName, task, summary: summary ?? "(no output)", sessionFile, exitCode: 0, elapsedMs };
+  const ping = sidecar.type === "ping" ? sidecar.message?.trim() : undefined;
+  return { name, agent: agentName, task, summary: ping ?? summary ?? "(no output)", sessionFile, exitCode: 0, elapsedMs };
 }
 
 // ── Polling ──
@@ -635,7 +635,22 @@ export function createDelegateTool(pi: ExtensionAPI): ToolDefinition<typeof Dele
       startStatusMonitor(pi);
 
       // Background watch — result steers back when done
-      watchDelegate(r, r.abortController.signal, pi);
+      void watchDelegate(r, r.abortController.signal, pi).catch((err) => {
+        if (r.abortController.signal.aborted) return;
+        try {
+          pi.sendMessage(
+            {
+              customType: "delegate_result",
+              content: `Delegate "${r.name}" failed while collecting its result.\n\n${err instanceof Error ? err.message : String(err)}`,
+              display: true,
+              details: { id: r.id, name: r.name, error: String(err) },
+            },
+            { triggerTurn: true, deliverAs: "steer" },
+          );
+        } catch {
+          // Parent may have shut down or replaced the session.
+        }
+      });
 
       return {
         content: [{ type: "text", text: `Spawned \`${r.name}\` in a new herdr tab. Result will appear when done.` }],

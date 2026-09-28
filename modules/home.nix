@@ -1,18 +1,19 @@
-{ lib, pkgs, inputs, flakePkgs, config, ... }:
-let
-  pi = ".pi/agent";
-  omp = ".omp/agent";
-  link = config.lib.file.mkOutOfStoreSymlink;
-  starshipConfigPath = ../starship/config.toml;
-  starshipSettings =
-    if builtins.pathExists starshipConfigPath
-    then builtins.fromTOML (builtins.readFile starshipConfigPath)
-    else { };
-in
+{ den, ... }:
 {
-  targets.genericLinux.enable = true;
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.nixGL.overlays.default ];
+  den.aspects.ryuko.homeManager =
+    { lib, pkgs, flakePkgs, config, ... }:
+    let
+      pi = ".pi/agent";
+      omp = ".omp/agent";
+      link = config.lib.file.mkOutOfStoreSymlink;
+      starshipConfigPath = ../starship/config.toml;
+      starshipSettings =
+        if builtins.pathExists starshipConfigPath
+        then builtins.fromTOML (builtins.readFile starshipConfigPath)
+        else { };
+    in
+    {
+      targets.genericLinux.enable = true;
 
   home = {
     username = "ryuko";
@@ -33,6 +34,12 @@ in
       ".zshrc".source = ../zsh/.zshrc;
       ".zshenv".source = ../zsh/.zshenv;
       ".profile".source = ../.profile;
+
+      # BB custom theme
+      ".bb/theme/rose-pine/theme.css" = {
+        source = link "${config.home.homeDirectory}/dotfiles/agents/bb/rose-pine/theme.css";
+        force = true;
+      };
 
       # Pi coding agent configs
       "${pi}/AGENTS.md" = {
@@ -166,5 +173,6 @@ in
     setEnvironment = ''
       export HOME="${config.home.homeDirectory}"
     '';
-  };
+      };
+    };
 }

@@ -83,11 +83,15 @@ function getForkContent(parentSessionFile: string): string[] {
 export function getNewEntries(sessionFile: string, afterLine: number): SessionEntry[] {
   if (!existsSync(sessionFile)) return [];
   const raw = readFileSync(sessionFile, "utf8");
-  return raw
-    .split("\n")
-    .filter((line) => line.trim())
-    .slice(afterLine)
-    .map((line) => JSON.parse(line) as SessionEntry);
+  const entries: SessionEntry[] = [];
+  for (const line of raw.split("\n").filter((line) => line.trim()).slice(afterLine)) {
+    try {
+      entries.push(JSON.parse(line) as SessionEntry);
+    } catch {
+      // The child may be writing the final JSONL line while we poll.
+    }
+  }
+  return entries;
 }
 
 /** Find the last assistant message text in a list of entries. */

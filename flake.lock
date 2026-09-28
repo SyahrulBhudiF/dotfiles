@@ -21,6 +21,21 @@
         "type": "github"
       }
     },
+    "den": {
+      "locked": {
+        "lastModified": 1790444791,
+        "narHash": "sha256-ViEP064/HAeKV+Mhb4Vb5l8Lr33eNLDJib0E8JtLYrg=",
+        "owner": "denful",
+        "repo": "den",
+        "rev": "d0d80faa36f735c9390c1f6e0a3a481ae7ae31d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "denful",
+        "repo": "den",
+        "type": "github"
+      }
+    },
     "evil-helix": {
       "inputs": {
         "nixpkgs": [
@@ -29,11 +44,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1775336644,
-        "narHash": "sha256-debbUtuOO7sEvKfCVV2MUGiYag193bDg78HuVbvuVUw=",
+        "lastModified": 1788188896,
+        "narHash": "sha256-mZDxtKxbZlKyTQworvaqJzW0fMl5Z/LYzKJL+j3Hhhk=",
         "owner": "usagi-flow",
         "repo": "evil-helix",
-        "rev": "a034ec2f6abd82be44d8eddb6ef74444108fce29",
+        "rev": "50bf2010eec939bf7bde7f8b062c2a183181f996",
         "type": "github"
       },
       "original": {
@@ -64,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786719456,
-        "narHash": "sha256-B74DLQs/VjlqyhnnX3tguWwghqJHWSJX30TKZuAljIg=",
+        "lastModified": 1790365885,
+        "narHash": "sha256-iQ0ebhiVo64NktTnwft9hNxlFu4j5cvljVxyJaEVIP4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "83b7606dcf44abe3a94b86e8bb2b3355d22e8797",
+        "rev": "7b4c5ec4bedaf1e062bbc1bcaeddbc6bd242aa1b",
         "type": "github"
       },
       "original": {
@@ -117,11 +132,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1786593342,
-        "narHash": "sha256-smTKQXMLLStzc8zJevMCckbk3My7SvbbLmPYZUJJKW4=",
+        "lastModified": 1790510107,
+        "narHash": "sha256-EVMNYv7hYDDD9TGVT/hIyTYgpiXA8y3m5xIEIxuGNU0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6b5e5b7a6631f065bf6908986990b37d845f847f",
+        "rev": "3181085bfd08663b6b9e60bc7a8395c2aaa741bd",
         "type": "github"
       },
       "original": {
@@ -134,6 +149,7 @@
     "root": {
       "inputs": {
         "bash-env-json": "bash-env-json",
+        "den": "den",
         "evil-helix": "evil-helix",
         "home-manager": "home-manager",
         "nixGL": "nixGL",

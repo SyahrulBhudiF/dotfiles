@@ -6,7 +6,8 @@
  */
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
-import { writeFileSync } from "node:fs";
+import { mkdirSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { createRecorder } from "../delegate/activity.ts";
 
 export default function (pi: ExtensionAPI) {
@@ -25,7 +26,15 @@ export default function (pi: ExtensionAPI) {
   // Written explicitly by delegate_done / caller_ping tools.
   // NOT written by auto-exit (relies on pane sentinel instead).
   function done(type: "done" | "ping" | "error", extra: Record<string, unknown> = {}) {
-    writeFileSync(`${sessionFile}.exit`, JSON.stringify({ type, name, ...extra }));
+    const path = `${sessionFile}.exit`;
+    const temp = `${path}.${process.pid}.tmp`;
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(temp, JSON.stringify({ type, name, ...extra }) + "\n");
+    try {
+      renameSync(temp, path);
+    } catch {
+      try { unlinkSync(temp); } catch {}
+    }
   }
 
   // ── Auto-exit (matching upstream pi-interactive-delegates) ──

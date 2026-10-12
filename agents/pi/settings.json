@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.4",
   "defaultThinkingLevel": "high",
   "theme": "rose-pine-dawn",
   "quietStartup": true,
@@ -18,7 +18,8 @@
     "npm:pi-dynamic-workflows",
     "npm:@ff-labs/pi-fff",
     "git:github.com/DietrichGebert/ponytail",
-    "npm:pi-intercom"
+    "npm:pi-intercom",
+    "https://github.com/cathrynlavery/diagram-design"
   ],
   "editorPaddingX": 0,
   "autocompleteMaxVisible": 10,
@@ -26,5 +27,11 @@
   "doubleEscapeAction": "tree",
   "hideThinkingBlock": false,
   "fullscreenScrollbar": "auto",
-  "tuiMode": "regular"
+  "tuiMode": "regular",
+  "piExecutor": {
+    "autoStart": false
+  },
+  "extensions": [
+    "-builtin:mcp"
+  ]
 }

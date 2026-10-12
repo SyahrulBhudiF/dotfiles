@@ -25,6 +25,13 @@
         identityFile = "~/.ssh/id_ed25519_najla";
         identitiesOnly = true;
       };
+      "gl-sobatbisnis gitlab.sobatbisnis.com" = {
+        hostname = "gitlab.sobatbisnis.com";
+        port = 2222;
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_sobatbisnis";
+        identitiesOnly = true;
+      };
       "*" = {
         forwardAgent = false;
         serverAliveInterval = 0;

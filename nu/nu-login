@@ -1,0 +1,3 @@
+#!/bin/sh
+nu_bin=$(command -v nu) || exit 127
+exec "$nu_bin" --login "$@"

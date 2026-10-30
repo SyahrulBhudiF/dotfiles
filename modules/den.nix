@@ -6,7 +6,24 @@
     pkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
-      overlays = [ inputs.nixGL.overlays.default ];
+      overlays = [
+        (final: _:
+          let
+            nixGLPkgs = final // {
+              pcre = final.pcre2;
+              writeTextFile = args: final.writeTextFile (args // {
+                checkPhase = final.lib.replaceStrings [ "pcregrep" ] [ "pcre2grep" ] args.checkPhase;
+              });
+              callPackage = final.lib.callPackageWith nixGLPkgs;
+            };
+          in {
+            nixgl = import inputs.nixGL {
+              pkgs = nixGLPkgs;
+              enable32bits = final.stdenv.hostPlatform.isx86;
+              enableIntelX86Extensions = final.stdenv.hostPlatform.isx86;
+            };
+          })
+      ];
     };
     instantiate = args:
       inputs.home-manager.lib.homeManagerConfiguration (args // {

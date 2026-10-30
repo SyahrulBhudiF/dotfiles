@@ -6,6 +6,22 @@
       pi = ".pi/agent";
       omp = ".omp/agent";
       link = config.lib.file.mkOutOfStoreSymlink;
+      dmsWidgets = builtins.listToAttrs (map (widget: {
+        name = ".config/DankMaterialShell/plugins/${widget}";
+        value.source = link "${config.home.homeDirectory}/dotfiles/dms/dms-widgets/${widget}";
+      }) [
+        "wb-board"
+        "wb-usercard"
+        "wb-clock"
+        "wb-cpu"
+        "wb-ram"
+        "wb-battery"
+        "wb-media"
+        "wb-worldclock"
+        "wb-calendar"
+        "wb-weather"
+        "wb-converter"
+      ]);
       starshipConfigPath = ../starship/config.toml;
       starshipSettings =
         if builtins.pathExists starshipConfigPath
@@ -103,7 +119,7 @@
         recursive = true;
         force = true;
       };
-    };
+    } // dmsWidgets;
   };
 
   i18n.inputMethod = {

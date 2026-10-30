@@ -1,2 +1,2 @@
-export PATH="$HOME/Packages/flutter/bin:$PATH"
 . "$HOME/.cargo/env"
+. "$HOME/dotfiles/shell/set-path.sh"

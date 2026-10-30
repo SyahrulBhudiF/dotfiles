@@ -12,37 +12,37 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "gh-cavos" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_cavos";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_cavos";
+        IdentitiesOnly = true;
       };
       "gh-najla" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_najla";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_najla";
+        IdentitiesOnly = true;
       };
       "gl-sobatbisnis gitlab.sobatbisnis.com" = {
-        hostname = "gitlab.sobatbisnis.com";
-        port = 2222;
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519_sobatbisnis";
-        identitiesOnly = true;
+        HostName = "gitlab.sobatbisnis.com";
+        Port = 2222;
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519_sobatbisnis";
+        IdentitiesOnly = true;
       };
       "*" = {
-        forwardAgent = false;
-        serverAliveInterval = 0;
-        serverAliveCountMax = 3;
-        compression = false;
-        addKeysToAgent = "no";
-        hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/known_hosts";
-        controlMaster = "no";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
+        ForwardAgent = false;
+        ServerAliveInterval = 0;
+        ServerAliveCountMax = 3;
+        Compression = false;
+        AddKeysToAgent = "no";
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+        ControlMaster = "no";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "no";
       };
     };
   };

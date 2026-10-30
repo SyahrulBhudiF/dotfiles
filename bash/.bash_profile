@@ -8,3 +8,4 @@ fi
 # User specific environment and startup programs
 . "$HOME/.cargo/env"
 . "$HOME/.local/bin/env"
+. "$HOME/dotfiles/shell/set-path.sh"

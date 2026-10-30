@@ -232,6 +232,213 @@
         "apiKey": "{env:AUTH_TOKEN}"
       },
       "models": {
+        "ag/claude-opus-4-6": {
+          "name": "Ag Claude Opus 4 6",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "ag/claude-sonnet-4-6": {
+          "name": "Ag Claude Sonnet 4 6",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "beam-free": {
+          "name": "Beam Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "big-pickle": {
+          "name": "Big Pickle",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "cat-jam-free": {
+          "name": "Cat Jam Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "cohere/north-mini-code:free": {
+          "name": "Cohere North Mini Code Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "composer-2.5-fast": {
+          "name": "Composer 2 5 Fast",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "deepseek-v4.1-flash-free": {
+          "name": "Deepseek V4 1 Flash Free",
+          "limit": {
+            "context": 1000000,
+            "output": 16384
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "dots-studio/dots-3-note-preview:free": {
+          "name": "Dots Studio Dots 3 Note Preview Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "exo-free": {
+          "name": "Exo Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gemini-3.5-flash-lite": {
+          "name": "Gemini 3 5 Flash Lite",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gemini-3.8-flash": {
+          "name": "Gemini 3 8 Flash",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "glm-5.3-flash-free": {
+          "name": "Glm 5 3 Flash Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
         "gpt-5.6-luna": {
           "name": "Gpt 5 6 Luna",
           "limit": {
@@ -264,8 +471,407 @@
             ]
           }
         },
-        "gpt-image-2.5": {
-          "name": "Gpt Image 2 5",
+        "grok-4.5": {
+          "name": "Grok 4 5",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "grok-4.6": {
+          "name": "Grok 4 6",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "grok-4.7": {
+          "name": "Grok 4 7",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "kilo-auto/free": {
+          "name": "Kilo Auto Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "liquid/lfm-2.5-2.6b:free": {
+          "name": "Liquid Lfm 2 5 2 6b Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "longcat-2.5-preview-free": {
+          "name": "Longcat 2 5 Preview Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "mimo-v2.6-flash-free": {
+          "name": "Mimo V2 6 Flash Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "minimax-m3.1-flash-free": {
+          "name": "Minimax M3 1 Flash Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nemotron-3-ultra-free": {
+          "name": "Nemotron 3 Ultra Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nemotron-3.5-lightning-free": {
+          "name": "Nemotron 3 5 Lightning Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nemotron-3.5-super-vl-free": {
+          "name": "Nemotron 3 5 Super Vl Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+          "name": "Nvidia Nemotron 3 Nano Omni 30b A3b Reasoning Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3-super-120b-a12b:free": {
+          "name": "Nvidia Nemotron 3 Super 120b A12b Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "name": "Nvidia Nemotron 3 Ultra 550b A55b Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3.5-content-safety:free": {
+          "name": "Nvidia Nemotron 3 5 Content Safety Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3.5-lightning:free": {
+          "name": "Nvidia Nemotron 3 5 Lightning Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "nvidia/nemotron-3.5-super-vl:free": {
+          "name": "Nvidia Nemotron 3 5 Super Vl Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/free": {
+          "name": "Openrouter Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "poolside/laguna-s-2.1:free": {
+          "name": "Poolside Laguna S 2 1 Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "poolside/laguna-xs-2.1:free": {
+          "name": "Poolside Laguna Xs 2 1 Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "reflection/beam-free": {
+          "name": "Reflection Beam Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "thinkingmachines/inkling-small:free": {
+          "name": "Thinkingmachines Inkling Small Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "xingchen-agi/xing4.0-29b-a4b:free": {
+          "name": "Xingchen Agi Xing4 0 29b A4b Free",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/claude-haiku-4-5": {
+          "name": "Zed Claude Haiku 4 5",
+          "limit": {
+            "context": 272000,
+            "output": 8192
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/claude-haiku-5-5": {
+          "name": "Zed Claude Haiku 5 5",
+          "limit": {
+            "context": 272000,
+            "output": 8192
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/claude-sonnet-4-5": {
+          "name": "Zed Claude Sonnet 4 5",
           "limit": {
             "context": 272000,
             "output": 64000
@@ -280,8 +886,8 @@
             ]
           }
         },
-        "gpt-image-2.5-flare": {
-          "name": "Gpt Image 2 5 Flare",
+        "zed/claude-sonnet-4-6": {
+          "name": "Zed Claude Sonnet 4 6",
           "limit": {
             "context": 272000,
             "output": 64000
@@ -296,8 +902,136 @@
             ]
           }
         },
-        "gpt-image-2.5-sunburst": {
-          "name": "Gpt Image 2 5 Sunburst",
+        "zed/claude-sonnet-5": {
+          "name": "Zed Claude Sonnet 5",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/claude-sonnet-5-5": {
+          "name": "Zed Claude Sonnet 5 5",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gemini-4-argon": {
+          "name": "Zed Gemini 4 Argon",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-5.6-luna": {
+          "name": "Zed Gpt 5 6 Luna",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-5.6-sol": {
+          "name": "Zed Gpt 5 6 Sol",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-5.6-terra": {
+          "name": "Zed Gpt 5 6 Terra",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-6-luna": {
+          "name": "Zed Gpt 6 Luna",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-6-sol": {
+          "name": "Zed Gpt 6 Sol",
+          "limit": {
+            "context": 272000,
+            "output": 64000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "zed/gpt-6.1-sol": {
+          "name": "Zed Gpt 6 1 Sol",
           "limit": {
             "context": 272000,
             "output": 64000

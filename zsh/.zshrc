@@ -11,9 +11,6 @@ eval "$(starship init zsh)"
 
 eval "$(zoxide init zsh)"
 
-export PATH="$HOME/Packages/flutter/bin:$PATH"
-export CHROME_EXECUTABLE="/var/lib/flatpak/app/com.google.Chrome/x86_64/stable/active/export/bin/com.google.Chrome"
-
 # dedupe/remove paths safely in zsh
 typeset -U path PATH
 path=(${path:#$HOME/.bun/bin})
@@ -55,3 +52,5 @@ alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 
 . "$HOME/.local/bin/env"
 alias zen-update="$HOME/.local/bin/zen-update"
+
+. "$HOME/dotfiles/shell/set-path.sh"

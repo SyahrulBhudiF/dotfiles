@@ -6,8 +6,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]]; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 export PATH
 
@@ -26,3 +26,4 @@ unset rc
 
 . "$HOME/.cargo/env"
 . "$HOME/.local/bin/env"
+. "$HOME/dotfiles/shell/set-path.sh"

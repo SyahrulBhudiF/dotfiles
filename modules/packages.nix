@@ -14,6 +14,7 @@ with pkgs; [
   qpdf          # PDF manipulation tool
   jujutsu       # Distributed version control system
   mosh          # Mobile shell
+  devenv        # Reproducible development environments
 
   # --- Document Processing ---
   typst         # Markup-based typesetting system

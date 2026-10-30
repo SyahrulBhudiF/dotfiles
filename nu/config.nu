@@ -17,23 +17,19 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
-$env.PATH = ($env.PATH
-    | where $it != $"($env.HOME)/.bun/bin"
-    | prepend '/usr/local/bin'
-    | prepend '/usr/bin'
-    | prepend $"($env.HOME)/.config/composer/vendor/bin"
-    | prepend $"($env.HOME)/.nix-profile/bin"
-    | prepend $"($env.HOME)/Packages/flutter/bin"
-    | prepend $"($env.HOME)/.local/bin"
-    | prepend $"($env.HOME)/.cargo/bin"
-    | prepend $"($env.HOME)/go/bin"
-    | prepend $"($env.HOME)/.bun/bin"
-    | prepend $"($env.HOME)/.moon/bin/"
-    | prepend $"($env.HOME)/.vite-plus/env"
+$env.PATH = (
+    open ($env.HOME | path join "dotfiles" "shell" "path.dirs")
+    | lines
+    | where {|entry| $entry != "" and not ($entry | str starts-with "#") }
+    | each {|entry| $entry | str replace --regex '^@' $env.HOME }
 )
 
 $env.SSH_AUTH_SOCK = "/run/user/1000/ssh-agent.socket"
-$env.SHELL = (which nu | get path.0)
+$env.SHELL = ($env.HOME | path join "dotfiles" "nu" "nu-login")
+
+def --env unset [...names: string] {
+    hide-env --ignore-errors ...$names
+}
 
 source ~/.zoxide.nu
 
@@ -62,6 +58,4 @@ alias kotofetch = ~/dotfiles/nu/kotofetch
 $env.config = ($env.config? | default {} | merge { show_banner: false })
 ^~/dotfiles/nu/hello.nu
 
-# Google Cloud CLI
-$env.PATH = ($env.PATH | prepend "/home/ryuko/Downloads/google-cloud-sdk/bin")
 $env.PLANNOTATOR_REMOTE = "1"

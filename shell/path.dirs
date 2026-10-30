@@ -1,0 +1,16 @@
+@/Downloads/google-cloud-sdk/bin
+@/.vite-plus/bin
+@/.moon/bin
+@/.deno/bin
+@/.bun/bin
+@/go/bin
+@/.cargo/bin
+@/.local/bin
+@/.nix-profile/bin
+@/.config/composer/vendor/bin
+/usr/bin
+/usr/local/bin
+@/.npm-global/bin
+@/.amp/bin
+/nix/var/nix/profiles/default/bin
+/bin

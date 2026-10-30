@@ -1,0 +1,6 @@
+[submodule "dms/dank-recorder"]
+	path = dms/dank-recorder
+	url = https://github.com/SyahrulBhudiF/dank-recorder.git
+[submodule "dms/dms-widgets"]
+	path = dms/dms-widgets
+	url = https://github.com/nuarthy/dms-widgets.git
